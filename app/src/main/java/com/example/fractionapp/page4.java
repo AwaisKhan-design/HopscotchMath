@@ -13,7 +13,7 @@ import android.widget.Toast;
 public class page4 extends AppCompatActivity {
     previousScore previousScore;
     Button replay_btn, done_btn;
-    TextView correct_ans, best_score_textView, your_score_seconds, your_best_seconds, score_remark;
+    TextView correct_ans, best_score_textView, your_score_seconds, your_best_seconds, score_remark,next_problem_set;
     int score, finishTime;
     int bestScore = 0, best_Time = 0;
 
@@ -54,11 +54,11 @@ public class page4 extends AppCompatActivity {
     }
     private void setRemark() {
         if(score < 5){
-            score_remark.setText("Good job");
+            score_remark.setText("unsatisfactory job !");
         }else if(score > 5 && score < 8){
-            score_remark.setText("Excellent job");
+            score_remark.setText("Good job !");
         }else{
-            score_remark.setText("Superb job");
+            score_remark.setText("Excellent job !");
         }
     }
     private void checkBestScore(int score, int bestTime) {
@@ -88,13 +88,14 @@ public class page4 extends AppCompatActivity {
         your_score_seconds = findViewById(R.id.your_score_seconds);
         your_best_seconds = findViewById(R.id.your_best_seconds);
         score_remark = findViewById(R.id.score_remark);
+        next_problem_set = findViewById(R.id.next_problem_set);
     }
     private void actionListeners() {
         replay_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
-                    Intent i = new Intent(page4.this, page1.class);
+                    Intent i = new Intent(page4.this, page3.class);
                     startActivity(i);
                     finish();
                 }catch (Exception e){
@@ -106,6 +107,18 @@ public class page4 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+        next_problem_set.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Intent i = new Intent(page4.this, page1.class);
+                    startActivity(i);
+                    finish();
+                }catch (Exception e){
+                    Toast.makeText(page4.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

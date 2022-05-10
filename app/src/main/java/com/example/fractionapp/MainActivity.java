@@ -4,6 +4,7 @@ package com.example.fractionapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Rect;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -30,7 +31,7 @@ TextView counter, text1,text2,text3,text4,text5,text6,text7,text8,question_nomin
 ImageView cartoon_place, counting_Image;
 LinearLayout textBox1,textBox2,textBox3,textBox4;
 CountDownTimer countDownTimer;
-int count = 0;
+int count = 0, counting_image_height, counting_image_width, cartoon_image_width, cartoon_image_height;
 static int cart = 0;
 AnimationDrawable animation;
 String set_level,_text1,_text2,_text3,_text4;
@@ -51,6 +52,7 @@ int currentScore = 0, questionAttempted = 1, currentpos,finishTime;
             findViews();
             setCartoon();
             actionListeners();
+            getImageAxis();
             reverseTimer();
             quizModelarrayList = new ArrayList<>();
             setLevels();
@@ -262,7 +264,9 @@ int currentScore = 0, questionAttempted = 1, currentpos,finishTime;
     counting_Image.setImageDrawable(getDrawable(R.drawable.hopsc_01_h600));
     }
      else if(currentScore == 2){
-   counting_Image.setImageDrawable(getDrawable(R.drawable.hopsc_02_h600));
+//         getImageAxis();
+
+         counting_Image.setImageDrawable(getDrawable(R.drawable.hopsc_02_h600));
    }
      else if(currentScore == 3){
          counting_Image.setImageDrawable(getDrawable(R.drawable.hopsc_03_h600));
@@ -1186,5 +1190,9 @@ int currentScore = 0, questionAttempted = 1, currentpos,finishTime;
         quizModelarrayList.add(new QuizModel("350","500","2","3","1","2","7","10","3","4","710"));
         quizModelarrayList.add(new QuizModel("400","500","1","2","7","8","3","4","4","5","45"));
         quizModelarrayList.add(new QuizModel("450","500","2","5","9","10","3","4","4","5","910"));
+    }
+    public void getImageAxis(){
+        counting_image_height = counting_Image.getDrawable().getIntrinsicHeight();
+        counting_image_width = counting_Image.getDrawable().getIntrinsicWidth();
     }
 }

@@ -228,7 +228,7 @@ int currentScore = 0, questionAttempted = 1, currentpos,finishTime;
                         textBox3.setClickable(true);
                         textBox4.setClickable(true);
                     }
-                }, 3000);
+                }, 2000);
             }
         });
         textBox2.setOnClickListener(new View.OnClickListener() {
@@ -264,7 +264,7 @@ int currentScore = 0, questionAttempted = 1, currentpos,finishTime;
                         textBox3.setClickable(true);
                         textBox4.setClickable(true);
                     }
-                }, 3000);
+                }, 2000);
             }
         });
         textBox3.setOnClickListener(new View.OnClickListener() {
@@ -300,7 +300,7 @@ int currentScore = 0, questionAttempted = 1, currentpos,finishTime;
                         textBox3.setClickable(true);
                         textBox4.setClickable(true);
                     }
-                }, 3000);
+                }, 2000);
             }
         });
         textBox4.setOnClickListener(new View.OnClickListener() {
@@ -336,7 +336,7 @@ int currentScore = 0, questionAttempted = 1, currentpos,finishTime;
                         textBox3.setClickable(true);
                         textBox4.setClickable(true);
                     }
-                }, 3000);
+                }, 2000);
             }
         });
     }

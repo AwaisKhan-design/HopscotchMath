@@ -5,9 +5,12 @@
       <map>
         <entry key="..\:/Users/hp/AndroidStudioProjects/fractionApp/app/src/main/res/drawable/next_btn.xml" value="0.17" />
         <entry key="..\:/Users/hp/AndroidStudioProjects/fractionApp/app/src/main/res/drawable/quit_btn.xml" value="0.148" />
+        <entry key="..\:/Users/hp/AndroidStudioProjects/fractionApp/app/src/main/res/drawable/right_answer_shape.xml" value="0.1565" />
         <entry key="..\:/Users/hp/AndroidStudioProjects/fractionApp/app/src/main/res/drawable/square_shape.xml" value="0.148" />
+        <entry key="..\:/Users/hp/AndroidStudioProjects/fractionApp/app/src/main/res/drawable/wrong_answer_shape.xml" value="0.1565" />
         <entry key="..\:/Users/hp/AndroidStudioProjects/fractionApp/app/src/main/res/font/fonts.xml" value="0.21458333333333332" />
-        <entry key="..\:/Users/hp/AndroidStudioProjects/fractionApp/app/src/main/res/layout-land/activity_main.xml" value="0.18640444634459172" />
+        <entry key="..\:/Users/hp/AndroidStudioProjects/fractionApp/app/src/main/res/layout-land/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/hp/AndroidStudioProjects/fractionApp/app/src/main/res/layout-sw600dp/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/hp/AndroidStudioProjects/fractionApp/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/hp/AndroidStudioProjects/fractionApp/app/src/main/res/layout/activity_page1.xml" value="0.18640444634459172" />
         <entry key="..\:/Users/hp/AndroidStudioProjects/fractionApp/app/src/main/res/layout/activity_page2.xml" value="0.11354166666666667" />

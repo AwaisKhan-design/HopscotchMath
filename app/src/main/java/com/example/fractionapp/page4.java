@@ -54,15 +54,15 @@ public class page4 extends AppCompatActivity {
     }
     private void setRemark() {
         if(score < 5){
-            score_remark.setText("unsatisfactory job !");
-        }else if(score > 5 && score < 8){
-            score_remark.setText("Good job !");
+            score_remark.setText("Need Hard Work !");
+        }else if(score > 4 || score < 9){
+            score_remark.setText("Good Job !");
         }else{
-            score_remark.setText("Excellent job !");
+            score_remark.setText("Excellent Job !");
         }
     }
     private void checkBestScore(int score, int bestTime) {
-        if (score > bestScore || finishTime < bestTime) {
+        if (score > bestScore && finishTime < bestTime) {
             best_score_textView.setText(score + "/" + "10");
             previousScore.savesession(String.valueOf(score));
             your_best_seconds.setText("(" + finishTime + ")");
@@ -95,7 +95,7 @@ public class page4 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    Intent i = new Intent(page4.this, page3.class);
+                    Intent i = new Intent(page4.this, page1.class);
                     startActivity(i);
                     finish();
                 }catch (Exception e){

@@ -445,6 +445,7 @@ AnimationDrawable animation;
                 cartoon3.setClickable(false);
                 cartoon4.setClickable(false);
                 cartoon5.setClickable(false);
+                back_button.setClickable(false);
                 final Handler handler = new Handler(Looper.getMainLooper());
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -468,6 +469,7 @@ AnimationDrawable animation;
                 cartoon3.setClickable(false);
                 cartoon4.setClickable(false);
                 cartoon5.setClickable(false);
+                back_button.setClickable(false);
                 final Handler handler = new Handler(Looper.getMainLooper());
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -491,6 +493,7 @@ AnimationDrawable animation;
                 cartoon3.setClickable(false);
                 cartoon4.setClickable(false);
                 cartoon5.setClickable(false);
+                back_button.setClickable(false);
                 final Handler handler = new Handler(Looper.getMainLooper());
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -514,6 +517,7 @@ AnimationDrawable animation;
                 cartoon3.setClickable(false);
                 cartoon4.setClickable(false);
                 cartoon5.setClickable(false);
+                back_button.setClickable(false);
                 final Handler handler = new Handler(Looper.getMainLooper());
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -537,6 +541,7 @@ AnimationDrawable animation;
                 cartoon3.setClickable(false);
                 cartoon4.setClickable(false);
                 cartoon5.setClickable(false);
+                back_button.setClickable(false);
                 final Handler handler = new Handler(Looper.getMainLooper());
                 handler.postDelayed(new Runnable() {
                     @Override

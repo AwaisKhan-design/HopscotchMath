@@ -1,27 +1,27 @@
 package com.example.fractionapp;
 
-
+import androidx.annotation.Dimension;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Rect;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Looper;
+import android.telephony.TelephonyManager;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Switch;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -30,14 +30,16 @@ Button quit;
 TextView counter, text1,text2,text3,text4,text5,text6,text7,text8,question_nominator,question_denominator,attempted_qts;
 ImageView cartoon_place, counting_Image;
 LinearLayout textBox1,textBox2,textBox3,textBox4;
+RelativeLayout ll;
 CountDownTimer countDownTimer;
-int count = 0, counting_image_height, counting_image_width, cartoon_image_width, cartoon_image_height;
+int count = 0,height;
 static int cart = 0;
 AnimationDrawable animation;
 String set_level,_text1,_text2,_text3,_text4;
 private ArrayList<QuizModel> quizModelarrayList;
 Random random;
 int currentScore = 0, questionAttempted = 1, currentpos,finishTime;
+    View viewPager;
    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,9 +54,12 @@ int currentScore = 0, questionAttempted = 1, currentpos,finishTime;
             findViews();
             setCartoon();
             actionListeners();
-            getImageAxis();
             reverseTimer();
             quizModelarrayList = new ArrayList<>();
+            ll = new RelativeLayout(this);
+            DisplayMetrics displayMetrics = new DisplayMetrics();
+            getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+            height = displayMetrics.heightPixels;
             setLevels();
             random = new Random();
             currentpos = random.nextInt(quizModelarrayList.size());
@@ -63,6 +68,7 @@ int currentScore = 0, questionAttempted = 1, currentpos,finishTime;
             e.printStackTrace();
         }
     }
+
     private void setDataView(int currentpos) {
        try {
            if(questionAttempted == 11){
@@ -177,6 +183,7 @@ int currentScore = 0, questionAttempted = 1, currentpos,finishTime;
         textBox4 = findViewById(R.id.textBox4);
         attempted_qts = findViewById(R.id.attempted_qts);
         counting_Image = findViewById(R.id.countingImage);
+        viewPager = findViewById(R.id.pager);
     }
     private void actionListeners() {
         quit.setOnClickListener(new View.OnClickListener() {
@@ -191,94 +198,213 @@ int currentScore = 0, questionAttempted = 1, currentpos,finishTime;
         textBox1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                quit.setClickable(false);
+                textBox1.setClickable(false);
+                textBox2.setClickable(false);
+                textBox3.setClickable(false);
+                textBox4.setClickable(false);
+                final Handler handler = new Handler(Looper.getMainLooper());
                _text1 = text1.getText().toString().trim() + text2.getText().toString().trim();
                 if(quizModelarrayList.get(currentpos).getAnswer().trim().equals(_text1)){
                     currentScore++;
                     setCartoonImage();
-                    setCartoonRightAnimation();
-
+                        setCartoonRightAnimation();
+                        textBox1.setBackground(getDrawable(R.drawable.right_answer_shape));
                 }else{
                     setCartoonWrongAnimation();
+                    textBox1.setBackground(getDrawable(R.drawable.wrong_answer_shape));
                 }
-                attempted_qts.setText(questionAttempted+"/"+"10");
-                questionAttempted++;
-                currentpos = random.nextInt(quizModelarrayList.size());
-                setDataView(currentpos);
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        textBox1.setBackground(getDrawable(R.drawable.square_shape));
+                        attempted_qts.setText(questionAttempted+"/"+"10");
+                        questionAttempted++;
+                        currentpos = random.nextInt(quizModelarrayList.size());
+                        setDataView(currentpos);
+                        quit.setClickable(true);
+                        textBox1.setClickable(true);
+                        textBox2.setClickable(true);
+                        textBox3.setClickable(true);
+                        textBox4.setClickable(true);
+                    }
+                }, 3000);
             }
         });
         textBox2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final Handler handler = new Handler(Looper.getMainLooper());
+                quit.setClickable(false);
+                textBox1.setClickable(false);
+                textBox2.setClickable(false);
+                textBox3.setClickable(false);
+                textBox4.setClickable(false);
                 _text2 = text3.getText().toString().trim() + text4.getText().toString().trim();
                 if(quizModelarrayList.get(currentpos).getAnswer().trim().equals(_text2)){
                     currentScore++;
                     setCartoonImage();
                     setCartoonRightAnimation();
+                    textBox2.setBackground(getDrawable(R.drawable.right_answer_shape));
                 }else{
                     setCartoonWrongAnimation();
+                    textBox2.setBackground(getDrawable(R.drawable.wrong_answer_shape));
                 }
-                attempted_qts.setText(questionAttempted+"/"+"10");
-                questionAttempted++;
-                currentpos = random.nextInt(quizModelarrayList.size());
-                setDataView(currentpos);
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        textBox2.setBackground(getDrawable(R.drawable.square_shape));
+                        attempted_qts.setText(questionAttempted+"/"+"10");
+                        questionAttempted++;
+                        currentpos = random.nextInt(quizModelarrayList.size());
+                        setDataView(currentpos);
+                        quit.setClickable(true);
+                        textBox1.setClickable(true);
+                        textBox2.setClickable(true);
+                        textBox3.setClickable(true);
+                        textBox4.setClickable(true);
+                    }
+                }, 3000);
             }
         });
         textBox3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final Handler handler = new Handler(Looper.getMainLooper());
+                quit.setClickable(false);
+                textBox1.setClickable(false);
+                textBox2.setClickable(false);
+                textBox3.setClickable(false);
+                textBox4.setClickable(false);
                 _text3 = text5.getText().toString().trim() + text6.getText().toString().trim();
                 if(quizModelarrayList.get(currentpos).getAnswer().trim().equals(_text3)){
                     currentScore++;
                     setCartoonImage();
                     setCartoonRightAnimation();
+                    textBox3.setBackground(getDrawable(R.drawable.right_answer_shape));
                 }else{
                     setCartoonWrongAnimation();
+                    textBox3.setBackground(getDrawable(R.drawable.wrong_answer_shape));
                 }
-                attempted_qts.setText(questionAttempted+"/"+"10");
-                questionAttempted++;
-                currentpos = random.nextInt(quizModelarrayList.size());
-                setDataView(currentpos);
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        textBox3.setBackground(getDrawable(R.drawable.square_shape));
+                        attempted_qts.setText(questionAttempted+"/"+"10");
+                        questionAttempted++;
+                        currentpos = random.nextInt(quizModelarrayList.size());
+                        setDataView(currentpos);
+                        quit.setClickable(true);
+                        textBox1.setClickable(true);
+                        textBox2.setClickable(true);
+                        textBox3.setClickable(true);
+                        textBox4.setClickable(true);
+                    }
+                }, 3000);
             }
         });
         textBox4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final Handler handler = new Handler(Looper.getMainLooper());
+                quit.setClickable(false);
+                textBox1.setClickable(false);
+                textBox2.setClickable(false);
+                textBox3.setClickable(false);
+                textBox4.setClickable(false);
                 _text4 = text7.getText().toString().trim() + text8.getText().toString().trim();
                 if(quizModelarrayList.get(currentpos).getAnswer().trim().equals(_text4)){
                     currentScore++;
                     setCartoonImage();
                     setCartoonRightAnimation();
+                    textBox4.setBackground(getDrawable(R.drawable.right_answer_shape));
                 }else{
                     setCartoonWrongAnimation();
+                    textBox4.setBackground(getDrawable(R.drawable.wrong_answer_shape));
                 }
-                attempted_qts.setText(questionAttempted+"/"+"10");
-                questionAttempted++;
-                currentpos = random.nextInt(quizModelarrayList.size());
-                setDataView(currentpos);
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        textBox4.setBackground(getDrawable(R.drawable.square_shape));
+                        attempted_qts.setText(questionAttempted+"/"+"10");
+                        questionAttempted++;
+                        currentpos = random.nextInt(quizModelarrayList.size());
+                        setDataView(currentpos);
+                        quit.setClickable(true);
+                        textBox1.setClickable(true);
+                        textBox2.setClickable(true);
+                        textBox3.setClickable(true);
+                        textBox4.setClickable(true);
+                    }
+                }, 3000);
             }
         });
     }
 
     private void setCartoonImage() {
+
      if(currentScore == 1){
     counting_Image.setImageDrawable(getDrawable(R.drawable.hopsc_01_h600));
     }
      else if(currentScore == 2){
-//         getImageAxis();
-
          counting_Image.setImageDrawable(getDrawable(R.drawable.hopsc_02_h600));
+         if(viewPager.getTag().equals("phone")) {
+             RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(cartoon_place.getLayoutParams());
+             lp.setMargins(80, 0, 0, 120);
+             cartoon_place.setLayoutParams(lp);
+         }else if(viewPager.getTag().equals("tablet")){
+             RelativeLayout.LayoutParams lpp = new RelativeLayout.LayoutParams(cartoon_place.getLayoutParams());
+             lpp.setMargins(0, 0, 0, 0);
+             cartoon_place.setLayoutParams(lpp);
+         }
    }
      else if(currentScore == 3){
          counting_Image.setImageDrawable(getDrawable(R.drawable.hopsc_03_h600));
+         if(viewPager.getTag().equals("phone")) {
+             RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(cartoon_place.getLayoutParams());
+             lp.setMargins(300, 0, 0, 120);
+             cartoon_place.setLayoutParams(lp);
+         }else if(viewPager.getTag().equals("tablet")){
+             RelativeLayout.LayoutParams lpp = new RelativeLayout.LayoutParams(cartoon_place.getLayoutParams());
+             lpp.setMargins(0, 0, 0, 0);
+             cartoon_place.setLayoutParams(lpp);
+         }
      }
      else if(currentScore == 4){
          counting_Image.setImageDrawable(getDrawable(R.drawable.hopsc_04_h600));
+         if(viewPager.getTag().equals("phone")) {
+             RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(cartoon_place.getLayoutParams());
+             lp.setMargins(230, 0, 0, 210);
+             cartoon_place.setLayoutParams(lp);
+         }else if(viewPager.getTag().equals("tablet")){
+             RelativeLayout.LayoutParams lpp = new RelativeLayout.LayoutParams(cartoon_place.getLayoutParams());
+             lpp.setMargins(0, 0, 0, 0);
+             cartoon_place.setLayoutParams(lpp);
+         }
      }
      else if(currentScore == 5){
          counting_Image.setImageDrawable(getDrawable(R.drawable.hopsc_05_h600));
+         if(viewPager.getTag().equals("phone")) {
+             RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(cartoon_place.getLayoutParams());
+             lp.setMargins(180, 0, 0, 280);
+             cartoon_place.setLayoutParams(lp);
+         }else if(viewPager.getTag().equals("tablet")){
+             RelativeLayout.LayoutParams lpp = new RelativeLayout.LayoutParams(cartoon_place.getLayoutParams());
+             lpp.setMargins(0, 0, 0, 0);
+             cartoon_place.setLayoutParams(lpp);
+         }
      }
      else if(currentScore == 6){
          counting_Image.setImageDrawable(getDrawable(R.drawable.hopsc_06_h600));
+         if(viewPager.getTag().equals("phone")) {
+             RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(cartoon_place.getLayoutParams());
+             lp.setMargins(380, 0, 0, 280);
+             cartoon_place.setLayoutParams(lp);
+         }else if(viewPager.getTag().equals("tablet")){
+             RelativeLayout.LayoutParams lpp = new RelativeLayout.LayoutParams(cartoon_place.getLayoutParams());
+             lpp.setMargins(0, 0, 0, 0);
+             cartoon_place.setLayoutParams(lpp);
+         }
      }
      else if(currentScore == 7){
          counting_Image.setImageDrawable(getDrawable(R.drawable.hopsc_07_h600));
@@ -333,19 +459,39 @@ int currentScore = 0, questionAttempted = 1, currentpos,finishTime;
     }
     private void setCartoonRightAnimation() {
         if(cart == 1){
-            setRedRightAnswer();
+            if(currentScore < 9) {
+                setRedRightAnswer();
+            }else if(currentScore == 10){
+                setJumpRed();
+            }
         }
         else if(cart == 2){
-            setBlueRightAnswer();
+            if(currentScore < 9) {
+                setBlueRightAnswer();
+            }else if(currentScore == 10){
+                setJumpBlue();
+            }
         }
         else if(cart == 3){
-            setGreenRightAnswer();
+            if(currentScore < 9) {
+                setGreenRightAnswer();
+            }else if(currentScore == 10){
+                setJumpGreen();
+            }
         }
         else if(cart == 4){
-            setPinkRightAnswer();
+            if(currentScore < 9) {
+                setPinkRightAnswer();
+            }else if(currentScore == 10){
+                setJumpPink();
+            }
         }
         else{
-            setBlackRightAnswer();
+            if(currentScore < 9) {
+                setBlackRightAnswer();
+            }else if(currentScore == 10){
+                setJumpBlack();
+            }
         }
     }
 
@@ -921,6 +1067,452 @@ int currentScore = 0, questionAttempted = 1, currentpos,finishTime;
         animation.start();
     }
 
+    private void setJumpBlack(){
+        animation = new AnimationDrawable();
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00017),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00018),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00019),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00020),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00021),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00022),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00023),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00024),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00025),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00026),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00027),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00028),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00029),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00030),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00031),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00032),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00033),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00034),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00035),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00036),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00037),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00038),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00039),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00040),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00041),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00042),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00043),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00044),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00045),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00046),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00047),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00048),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00049),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00050),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00051),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00052),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00053),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00054),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00055),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00056),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00057),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00058),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00059),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00060),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00061),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00062),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00063),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00064),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00065),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00066),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00067),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00068),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00069),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00070),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00071),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00072),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00073),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00074),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00075),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00076),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00077),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00078),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00079),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00080),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00081),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00082),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00083),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00084),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00085),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00086),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00087),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00088),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00089),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00090),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00091),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00092),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00093),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00094),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00095),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00096),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00097),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00098),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_black_00099),50);
+        animation.setOneShot(true);
+        cartoon_place.setImageDrawable(animation);
+        animation.start();
+   }
+    private void setJumpGreen(){
+        animation = new AnimationDrawable();
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00017),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00018),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00019),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00020),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00021),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00022),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00023),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00024),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00025),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00026),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00027),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00028),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00029),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00030),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00031),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00032),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00033),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00034),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00035),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00036),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00037),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00038),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00039),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00040),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00041),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00042),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00043),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00044),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00045),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00046),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00047),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00048),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00049),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00050),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00051),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00052),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00053),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00054),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00055),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00056),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00057),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00058),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00059),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00060),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00061),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00062),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00063),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00064),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00065),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00066),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00067),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00068),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00069),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00070),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00071),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00072),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00073),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00074),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00075),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00076),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00077),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00078),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00079),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00080),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00081),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00082),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00083),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00084),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00085),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00086),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00087),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00088),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00089),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00090),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00091),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00092),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00093),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00094),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00095),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00096),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00097),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00098),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_green_00099),50);
+        animation.setOneShot(true);
+        cartoon_place.setImageDrawable(animation);
+        animation.start();
+   }
+    private void setJumpRed(){
+        animation = new AnimationDrawable();
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00017),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00018),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00019),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00020),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00021),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00022),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00023),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00024),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00025),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00026),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00027),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00028),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00029),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00030),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00031),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00032),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00033),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00034),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00035),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00036),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00037),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00038),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00039),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00040),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00041),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00042),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00043),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00044),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00045),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00046),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00047),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00048),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00049),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00050),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00051),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00052),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00053),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00054),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00055),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00056),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00057),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00058),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00059),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00060),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00061),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00062),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00063),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00064),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00065),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00066),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00067),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00068),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00069),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00070),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00071),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00072),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00073),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00074),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00075),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00076),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00077),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00078),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00079),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00080),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00081),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00082),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00083),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00084),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00085),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00086),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00087),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00088),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00089),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00090),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00091),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00092),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00093),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00094),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00095),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00096),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00097),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00098),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_red_00099),50);
+        animation.setOneShot(true);
+        cartoon_place.setImageDrawable(animation);
+        animation.start();
+   }
+    private void setJumpBlue(){
+        animation = new AnimationDrawable();
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00017),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00018),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00019),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00020),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00021),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00022),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00023),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00024),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00025),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00026),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00027),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00028),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00029),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00030),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00031),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00032),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00033),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00034),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00035),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00036),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00037),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00038),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00039),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00040),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00041),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00042),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00043),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00044),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00045),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00046),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00047),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00048),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00049),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00050),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00051),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00052),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00053),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00054),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00055),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00056),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00057),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00058),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00059),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00060),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00061),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00062),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00063),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00064),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00065),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00066),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00067),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00068),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00069),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00070),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00071),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00072),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00073),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00074),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00075),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00076),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00077),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00078),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00079),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00080),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00081),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00082),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00083),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00084),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00085),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00086),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00087),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00088),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00089),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00090),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00091),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00092),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00093),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00094),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00095),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00096),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00097),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00098),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_blue_00099),50);
+        animation.setOneShot(true);
+        cartoon_place.setImageDrawable(animation);
+        animation.start();
+   }
+    private void setJumpPink(){
+        animation = new AnimationDrawable();
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00017),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00018),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00019),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00020),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00021),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00022),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00023),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00024),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00025),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00026),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00027),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00028),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00029),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00030),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00031),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00032),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00033),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00034),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00035),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00036),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00037),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00038),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00039),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00040),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00041),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00042),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00043),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00044),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00045),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00046),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00047),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00048),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00049),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00050),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00051),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00052),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00053),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00054),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00055),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00056),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00057),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00058),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00059),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00060),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00061),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00062),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00063),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00064),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00065),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00066),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00067),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00068),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00069),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00070),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00071),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00072),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00073),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00074),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00075),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00076),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00077),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00078),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00079),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00080),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00081),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00082),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00083),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00084),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00085),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00086),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00087),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00088),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00089),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00090),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00091),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00092),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00093),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00094),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00095),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00096),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00097),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00098),50);
+        animation.addFrame(getResources().getDrawable(R.drawable.dance_pink_00099),50);
+        animation.setOneShot(true);
+        cartoon_place.setImageDrawable(animation);
+        animation.start();
+   }
+
     public void setOne(ArrayList<QuizModel> quizModelarrayList){
         quizModelarrayList.add(new QuizModel("9","12","1","4","2","5","2","3","3","4","34"));
         quizModelarrayList.add(new QuizModel("3","12","1","2","1","3","1","4","1","6","14"));
@@ -1190,9 +1782,5 @@ int currentScore = 0, questionAttempted = 1, currentpos,finishTime;
         quizModelarrayList.add(new QuizModel("350","500","2","3","1","2","7","10","3","4","710"));
         quizModelarrayList.add(new QuizModel("400","500","1","2","7","8","3","4","4","5","45"));
         quizModelarrayList.add(new QuizModel("450","500","2","5","9","10","3","4","4","5","910"));
-    }
-    public void getImageAxis(){
-        counting_image_height = counting_Image.getDrawable().getIntrinsicHeight();
-        counting_image_width = counting_Image.getDrawable().getIntrinsicWidth();
     }
 }

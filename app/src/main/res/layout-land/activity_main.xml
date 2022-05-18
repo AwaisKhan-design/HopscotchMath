@@ -327,13 +327,14 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <ImageView
                 android:id="@+id/countingImage"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_alignParentBottom="true"
                 android:adjustViewBounds="true"
-                android:scaleType="fitXY"
+                android:scaleType="fitCenter"
                 android:src="@drawable/hopsc_00_h600"></ImageView>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -449,7 +450,6 @@
                 </LinearLayout>
             </LinearLayout>
 
-
             <RelativeLayout
                 android:layout_width="80dp"
                 android:layout_height="80dp"
@@ -476,8 +476,8 @@
             </RelativeLayout>
             <ImageView
                 android:id="@+id/cartoon_place"
-                android:layout_width="160dp"
-                android:layout_height="250dp"
+                android:layout_width="100dp"
+                android:layout_height="120dp"
                 android:layout_alignParentBottom="true"
                 android:layout_marginStart="35dp"
                 android:src="@drawable/dance_red_00021"></ImageView>

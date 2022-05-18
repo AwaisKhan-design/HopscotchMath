@@ -316,17 +316,17 @@
             <ImageView
                 android:id="@+id/countingImage"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_alignParentBottom="true"
-                android:scaleType="fitXY"
+                android:scaleType="fitCenter"
                 android:src="@drawable/hopsc_00_h600"></ImageView>
 
             <ImageView
                 android:id="@+id/cartoon_place"
-                android:layout_width="300dp"
-                android:layout_height="400dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_marginStart="100dp"
+                android:layout_marginStart="120dp"
                 android:layout_marginBottom="30dp"
                 android:src="@drawable/dance_red_00021"></ImageView>
 

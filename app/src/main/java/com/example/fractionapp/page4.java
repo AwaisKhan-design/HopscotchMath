@@ -39,15 +39,7 @@ public class page4 extends AppCompatActivity {
                 bestScore = Integer.parseInt(previousScore.getScore());
                 best_Time = Integer.parseInt(previousScore.getsavetime());
                 checkBestScore(score,best_Time);
-               // checkTime(best_Time);
             }
-//            if (previousScore.getsavetime().equals("")) {
-//                your_best_seconds.setText("(" + finishTime + ")");
-//                previousScore.savetime(String.valueOf(finishTime));
-//            } else {
-//                best_Time = Integer.parseInt(previousScore.getsavetime());
-//                checkTime(best_Time);
-//            }
             actionListeners();
         } catch (Exception e) {
         }
@@ -55,31 +47,23 @@ public class page4 extends AppCompatActivity {
     private void setRemark() {
         if(score < 5){
             score_remark.setText("Need Hard Work !");
-        }else if(score > 4 || score < 9){
+        }else if(score >= 4 && score <= 8){
             score_remark.setText("Good Job !");
-        }else{
+        }else if(score >= 9){
             score_remark.setText("Excellent Job !");
         }
     }
     private void checkBestScore(int score, int bestTime) {
-        if (score > bestScore && finishTime < bestTime) {
+        if (score > bestScore || finishTime < bestTime) {
             best_score_textView.setText(score + "/" + "10");
             previousScore.savesession(String.valueOf(score));
-            your_best_seconds.setText("(" + finishTime + ")");
+            your_best_seconds.setText(" ("+ finishTime + ")");
             previousScore.savetime(String.valueOf(finishTime));
         } else {
             best_score_textView.setText(bestScore + "/" + "10");
-            your_best_seconds.setText("(" + best_Time + ")");
+            your_best_seconds.setText(" ("+ best_Time + ")");
         }
     }
-//        private void checkTime ( int bestTime){
-//            if (finishTime < bestTime) {
-//                your_best_seconds.setText("(" + finishTime + ")");
-//                previousScore.savetime(String.valueOf(finishTime));
-//            } else {
-//                your_best_seconds.setText("(" + best_Time + ")");
-//            }
-//        }
     private void findViews() {
         replay_btn = findViewById(R.id.replay_btn);
         done_btn = findViewById(R.id.done_btn);
@@ -95,7 +79,7 @@ public class page4 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    Intent i = new Intent(page4.this, page1.class);
+                    Intent i = new Intent(page4.this, MainActivity.class);
                     startActivity(i);
                     finish();
                 }catch (Exception e){

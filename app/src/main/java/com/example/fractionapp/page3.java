@@ -24,16 +24,18 @@ Button back_button;
 String level, set_level;
 ImageView cartoon1, cartoon2, cartoon3, cartoon4, cartoon5;
 AnimationDrawable animation;
+previousScore previousScore;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page3);
+        previousScore = new previousScore(this);
         animation = new AnimationDrawable();
         findView();
         Intent intent = getIntent();
        level = intent.getStringExtra("level");
        set_level = intent.getStringExtra("set_level");
-        counter();
+        difficulty();
         action_Listeners();
     }
     private void setRedImage() {
@@ -446,14 +448,14 @@ AnimationDrawable animation;
                 cartoon4.setClickable(false);
                 cartoon5.setClickable(false);
                 back_button.setClickable(false);
+                previousScore.saveset(set_level);
+                previousScore.savecartoon("1");
+                previousScore.saveLevel(level);
                 final Handler handler = new Handler(Looper.getMainLooper());
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         Intent intent = new Intent(page3.this, MainActivity.class);
-                        intent.putExtra("cartoon", "1");
-                        intent.putExtra("count", level);
-                        intent.putExtra("set_level", set_level);
                         startActivity(intent);
                         finish();
                     }
@@ -470,14 +472,14 @@ AnimationDrawable animation;
                 cartoon4.setClickable(false);
                 cartoon5.setClickable(false);
                 back_button.setClickable(false);
+                previousScore.saveset(set_level);
+                previousScore.savecartoon("2");
+                previousScore.saveLevel(level);
                 final Handler handler = new Handler(Looper.getMainLooper());
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         Intent intent = new Intent(page3.this, MainActivity.class);
-                        intent.putExtra("cartoon", "2");
-                        intent.putExtra("count", level);
-                        intent.putExtra("set_level", set_level);
                         startActivity(intent);
                         finish();
                     }
@@ -494,14 +496,14 @@ AnimationDrawable animation;
                 cartoon4.setClickable(false);
                 cartoon5.setClickable(false);
                 back_button.setClickable(false);
+                previousScore.saveset(set_level);
+                previousScore.savecartoon("3");
+                previousScore.saveLevel(level);
                 final Handler handler = new Handler(Looper.getMainLooper());
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         Intent intent = new Intent(page3.this, MainActivity.class);
-                        intent.putExtra("cartoon", "3");
-                        intent.putExtra("count", level);
-                        intent.putExtra("set_level", set_level);
                         startActivity(intent);
                         finish();
                     }
@@ -518,14 +520,14 @@ AnimationDrawable animation;
                 cartoon4.setClickable(false);
                 cartoon5.setClickable(false);
                 back_button.setClickable(false);
+                previousScore.saveset(set_level);
+                previousScore.savecartoon("4");
+                previousScore.saveLevel(level);
                 final Handler handler = new Handler(Looper.getMainLooper());
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         Intent intent = new Intent(page3.this, MainActivity.class);
-                        intent.putExtra("cartoon", "4");
-                        intent.putExtra("count", level);
-                        intent.putExtra("set_level", set_level);
                         startActivity(intent);
                         finish();
                     }
@@ -542,14 +544,14 @@ AnimationDrawable animation;
                 cartoon4.setClickable(false);
                 cartoon5.setClickable(false);
                 back_button.setClickable(false);
+                previousScore.saveset(set_level);
+                previousScore.savecartoon("5");
+                previousScore.saveLevel(level);
                 final Handler handler = new Handler(Looper.getMainLooper());
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         Intent intent = new Intent(page3.this, MainActivity.class);
-                        intent.putExtra("cartoon", "5");
-                        intent.putExtra("count", level);
-                        intent.putExtra("set_level", set_level);
                         startActivity(intent);
                         finish();
                     }
@@ -557,7 +559,7 @@ AnimationDrawable animation;
             }
         });
     }
-    private void counter(){
+    private void difficulty(){
         if(level.equals("Novice")){
             level = "95";
         }else if(level.equals("Confident")){

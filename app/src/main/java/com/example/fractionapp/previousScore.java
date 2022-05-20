@@ -21,5 +21,24 @@ public String getScore(){
     public String getsavetime(){
         return sharedPreferences.getString("previous_time","");
     }
+
+    public void savecartoon(String cartoon){
+        sharedPreferences.edit().putString("cartoon",cartoon).apply();
+    }
+    public String getcartoon(){
+        return sharedPreferences.getString("cartoon","");
+    }
+    public void saveset(String set){
+        sharedPreferences.edit().putString("set",set).apply();
+    }
+    public String getset(){
+        return sharedPreferences.getString("set","");
+    }
+    public void saveLevel(String level){
+        sharedPreferences.edit().putString("Level",level).apply();
+    }
+    public String getLevel(){
+        return sharedPreferences.getString("Level","");
+    }
 }
 

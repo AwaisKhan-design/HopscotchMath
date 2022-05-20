@@ -1,20 +1,12 @@
 package com.example.fractionapp;
-
-import androidx.annotation.Dimension;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Looper;
-import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -27,6 +19,7 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 Button quit;
+previousScore previousScore;
 TextView counter, text1,text2,text3,text4,text5,text6,text7,text8,question_nominator,question_denominator,attempted_qts;
 ImageView cartoon_place, counting_Image;
 LinearLayout textBox1,textBox2,textBox3,textBox4;
@@ -44,12 +37,12 @@ int currentScore = 0, questionAttempted = 1, currentpos,finishTime;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        previousScore = new previousScore(this);
         try {
-            Intent intent = getIntent();
-            cart = Integer.parseInt(intent.getStringExtra("cartoon"));
-            count = Integer.parseInt(intent.getStringExtra("count"));
+            cart = Integer.parseInt(previousScore.getcartoon());
+            count = Integer.parseInt(previousScore.getLevel());
             finishTime = count;
-            set_level = intent.getStringExtra("set_level");
+            set_level = previousScore.getset();
             animation = new AnimationDrawable();
             findViews();
             setCartoon();
@@ -350,11 +343,11 @@ int currentScore = 0, questionAttempted = 1, currentpos,finishTime;
          counting_Image.setImageDrawable(getDrawable(R.drawable.hopsc_02_h600));
          if(viewPager.getTag().equals("phone")) {
              RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(cartoon_place.getLayoutParams());
-             lp.setMargins(80, 0, 0, 120);
+             lp.setMargins(70, 270, 0, 0);
              cartoon_place.setLayoutParams(lp);
          }else if(viewPager.getTag().equals("tablet")){
              RelativeLayout.LayoutParams lpp = new RelativeLayout.LayoutParams(cartoon_place.getLayoutParams());
-             lpp.setMargins(160, 200, 0, 0);
+             lpp.setMargins(80, 500, 0, 0);
              cartoon_place.setLayoutParams(lpp);
          }
    }
@@ -362,11 +355,11 @@ int currentScore = 0, questionAttempted = 1, currentpos,finishTime;
          counting_Image.setImageDrawable(getDrawable(R.drawable.hopsc_03_h600));
          if(viewPager.getTag().equals("phone")) {
              RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(cartoon_place.getLayoutParams());
-             lp.setMargins(300, 0, 0, 120);
+             lp.setMargins(250, 270, 0, 0);
              cartoon_place.setLayoutParams(lp);
          }else if(viewPager.getTag().equals("tablet")){
              RelativeLayout.LayoutParams lpp = new RelativeLayout.LayoutParams(cartoon_place.getLayoutParams());
-             lpp.setMargins(460, 200, 0, 0);
+             lpp.setMargins(290, 500, 0, 0);
              cartoon_place.setLayoutParams(lpp);
          }
      }
@@ -374,11 +367,11 @@ int currentScore = 0, questionAttempted = 1, currentpos,finishTime;
          counting_Image.setImageDrawable(getDrawable(R.drawable.hopsc_04_h600));
          if(viewPager.getTag().equals("phone")) {
              RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(cartoon_place.getLayoutParams());
-             lp.setMargins(230, 0, 0, 210);
+             lp.setMargins(220, 210, 0, 0);
              cartoon_place.setLayoutParams(lp);
          }else if(viewPager.getTag().equals("tablet")){
              RelativeLayout.LayoutParams lpp = new RelativeLayout.LayoutParams(cartoon_place.getLayoutParams());
-             lpp.setMargins(410, 60, 0, 0);
+             lpp.setMargins(240, 370, 0, 0);
              cartoon_place.setLayoutParams(lpp);
          }
      }
@@ -386,11 +379,11 @@ int currentScore = 0, questionAttempted = 1, currentpos,finishTime;
          counting_Image.setImageDrawable(getDrawable(R.drawable.hopsc_05_h600));
          if(viewPager.getTag().equals("phone")) {
              RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(cartoon_place.getLayoutParams());
-             lp.setMargins(180, 0, 0, 280);
+             lp.setMargins(180, 140, 0, 0);
              cartoon_place.setLayoutParams(lp);
          }else if(viewPager.getTag().equals("tablet")){
              RelativeLayout.LayoutParams lpp = new RelativeLayout.LayoutParams(cartoon_place.getLayoutParams());
-             lpp.setMargins(0, 0, 0, 0);
+             lpp.setMargins(220, 270, 0, 0);
              cartoon_place.setLayoutParams(lpp);
          }
      }
@@ -398,25 +391,61 @@ int currentScore = 0, questionAttempted = 1, currentpos,finishTime;
          counting_Image.setImageDrawable(getDrawable(R.drawable.hopsc_06_h600));
          if(viewPager.getTag().equals("phone")) {
              RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(cartoon_place.getLayoutParams());
-             lp.setMargins(380, 0, 0, 280);
+             lp.setMargins(330, 140, 0, 0);
              cartoon_place.setLayoutParams(lp);
          }else if(viewPager.getTag().equals("tablet")){
              RelativeLayout.LayoutParams lpp = new RelativeLayout.LayoutParams(cartoon_place.getLayoutParams());
-             lpp.setMargins(0, 0, 0, 0);
+             lpp.setMargins(420, 270, 0, 0);
              cartoon_place.setLayoutParams(lpp);
          }
      }
      else if(currentScore == 7){
          counting_Image.setImageDrawable(getDrawable(R.drawable.hopsc_07_h600));
+         if(viewPager.getTag().equals("phone")) {
+             RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(cartoon_place.getLayoutParams());
+             lp.setMargins(300, 90, 0, 0);
+             cartoon_place.setLayoutParams(lp);
+         }else if(viewPager.getTag().equals("tablet")){
+             RelativeLayout.LayoutParams lpp = new RelativeLayout.LayoutParams(cartoon_place.getLayoutParams());
+             lpp.setMargins(370, 190, 0, 0);
+             cartoon_place.setLayoutParams(lpp);
+         }
      }
-     else if(currentScore == 8){
+     else if(currentScore == 8) {
          counting_Image.setImageDrawable(getDrawable(R.drawable.hopsc_08_h600));
+         if (viewPager.getTag().equals("phone")) {
+             RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(cartoon_place.getLayoutParams());
+             lp.setMargins(260, 40, 0, 0);
+             cartoon_place.setLayoutParams(lp);
+         } else if (viewPager.getTag().equals("tablet")) {
+             RelativeLayout.LayoutParams lpp = new RelativeLayout.LayoutParams(cartoon_place.getLayoutParams());
+             lpp.setMargins(310, 120, 0, 0);
+             cartoon_place.setLayoutParams(lpp);
+         }
      }
      else if(currentScore == 9){
          counting_Image.setImageDrawable(getDrawable(R.drawable.hopsc_09_h600));
+         if (viewPager.getTag().equals("phone")) {
+             RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(cartoon_place.getLayoutParams());
+             lp.setMargins(390, 40, 0, 0);
+             cartoon_place.setLayoutParams(lp);
+         } else if (viewPager.getTag().equals("tablet")) {
+             RelativeLayout.LayoutParams lpp = new RelativeLayout.LayoutParams(cartoon_place.getLayoutParams());
+             lpp.setMargins(490, 120, 0, 0);
+             cartoon_place.setLayoutParams(lpp);
+         }
      }
      else if(currentScore == 10){
          counting_Image.setImageDrawable(getDrawable(R.drawable.hopsc_10_h600));
+         if (viewPager.getTag().equals("phone")) {
+             RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(cartoon_place.getLayoutParams());
+             lp.setMargins(350, 0, 0, 0);
+             cartoon_place.setLayoutParams(lp);
+         } else if (viewPager.getTag().equals("tablet")) {
+             RelativeLayout.LayoutParams lpp = new RelativeLayout.LayoutParams(cartoon_place.getLayoutParams());
+             lpp.setMargins(440, 60, 0, 0);
+             cartoon_place.setLayoutParams(lpp);
+         }
      }
      else{
 

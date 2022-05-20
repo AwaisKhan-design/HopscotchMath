@@ -596,7 +596,7 @@ int currentScore = 0, questionAttempted = 1, currentpos,finishTime;
         animation.addFrame(getResources().getDrawable(R.drawable.jump_red_00104),50);
         animation.addFrame(getResources().getDrawable(R.drawable.jump_red_00105),50);
         animation.addFrame(getResources().getDrawable(R.drawable.jump_red_00106),50);
-        animation.setOneShot(false);
+        animation.setOneShot(true);
         cartoon_place.setImageDrawable(animation);
         animation.start();
     }

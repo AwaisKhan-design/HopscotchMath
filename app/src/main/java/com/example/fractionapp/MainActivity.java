@@ -1,6 +1,8 @@
 package com.example.fractionapp;
 import androidx.appcompat.app.AppCompatActivity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -31,7 +33,8 @@ AnimationDrawable animation;
 String set_level,_text1,_text2,_text3,_text4;
 private ArrayList<QuizModel> quizModelarrayList;
 Random random;
-int currentScore = 0, questionAttempted = 1, currentpos,finishTime;
+int questionAttempted = 1;
+int currentScore = 0, currentpos,finishTime;
     View viewPager;
    @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +42,14 @@ int currentScore = 0, questionAttempted = 1, currentpos,finishTime;
         setContentView(R.layout.activity_main);
         previousScore = new previousScore(this);
         try {
+           String size =  getSizeName(this);
             cart = Integer.parseInt(previousScore.getcartoon());
             count = Integer.parseInt(previousScore.getLevel());
             finishTime = count;
             set_level = previousScore.getset();
             animation = new AnimationDrawable();
             findViews();
+            Toast.makeText(this, ""+size +" "+viewPager.getTag(), Toast.LENGTH_SHORT).show();
             setCartoon();
             actionListeners();
             reverseTimer();
@@ -64,26 +69,6 @@ int currentScore = 0, questionAttempted = 1, currentpos,finishTime;
 
     private void setDataView(int currentpos) {
        try {
-           if(questionAttempted == 11){
-               final Handler handler = new Handler(Looper.getMainLooper());
-               finishTime = finishTime - count;
-               countDownTimer.cancel();
-               quit.setClickable(false);
-               textBox1.setClickable(false);
-               textBox2.setClickable(false);
-               textBox3.setClickable(false);
-               textBox4.setClickable(false);
-               handler.postDelayed(new Runnable() {
-                   @Override
-                   public void run() {
-                       Intent intent = new Intent(MainActivity.this,page4.class);
-                       intent.putExtra("score", currentScore);
-                       intent.putExtra("countTime",finishTime);
-                       startActivity(intent);
-                       finish();
-                   }
-               }, 3500);
-           }else {
                question_nominator.setText(quizModelarrayList.get(currentpos).getQuestion_nominator());
                question_denominator.setText(quizModelarrayList.get(currentpos).getQuestion_denominator());
                text1.setText(quizModelarrayList.get(currentpos).getOption1_text1());
@@ -94,7 +79,6 @@ int currentScore = 0, questionAttempted = 1, currentpos,finishTime;
                text6.setText(quizModelarrayList.get(currentpos).getOption3_text2());
                text7.setText(quizModelarrayList.get(currentpos).getOption4_text1());
                text8.setText(quizModelarrayList.get(currentpos).getOption4_text2());
-           }
        }catch (Exception e){
            Toast.makeText(this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
        }
@@ -198,6 +182,12 @@ int currentScore = 0, questionAttempted = 1, currentpos,finishTime;
                 textBox4.setClickable(false);
                 final Handler handler = new Handler(Looper.getMainLooper());
                _text1 = text1.getText().toString().trim() + text2.getText().toString().trim();
+                if(questionAttempted != 1) {
+                    attempted_qts.setText(questionAttempted + "/" + "10");
+                    questionAttempted++;
+                }else{
+                    questionAttempted++;
+                }
                 if(quizModelarrayList.get(currentpos).getAnswer().trim().equals(_text1)){
                     currentScore++;
                     setCartoonImage();
@@ -211,15 +201,35 @@ int currentScore = 0, questionAttempted = 1, currentpos,finishTime;
                     @Override
                     public void run() {
                         textBox1.setBackground(getDrawable(R.drawable.square_shape));
-                        attempted_qts.setText(questionAttempted+"/"+"10");
-                        questionAttempted++;
                         currentpos = random.nextInt(quizModelarrayList.size());
-                        setDataView(currentpos);
-                        quit.setClickable(true);
-                        textBox1.setClickable(true);
-                        textBox2.setClickable(true);
-                        textBox3.setClickable(true);
-                        textBox4.setClickable(true);
+                        if(questionAttempted == 11){
+                            final Handler handler = new Handler(Looper.getMainLooper());
+                            finishTime = finishTime - count;
+                            countDownTimer.cancel();
+                            questionAttempted = 1;
+                            quit.setClickable(false);
+                            textBox1.setClickable(false);
+                            textBox2.setClickable(false);
+                            textBox3.setClickable(false);
+                            textBox4.setClickable(false);
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Intent intent = new Intent(MainActivity.this,page4.class);
+                                    intent.putExtra("score", currentScore);
+                                    intent.putExtra("countTime",finishTime);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            }, 1000);
+                        }else{
+                            setDataView(currentpos);
+                            quit.setClickable(true);
+                            textBox1.setClickable(true);
+                            textBox2.setClickable(true);
+                            textBox3.setClickable(true);
+                            textBox4.setClickable(true);
+                        }
                     }
                 }, 2000);
             }
@@ -234,6 +244,12 @@ int currentScore = 0, questionAttempted = 1, currentpos,finishTime;
                 textBox3.setClickable(false);
                 textBox4.setClickable(false);
                 _text2 = text3.getText().toString().trim() + text4.getText().toString().trim();
+                if(questionAttempted != 1) {
+                    attempted_qts.setText(questionAttempted + "/" + "10");
+                    questionAttempted++;
+                }else{
+                    questionAttempted++;
+                }
                 if(quizModelarrayList.get(currentpos).getAnswer().trim().equals(_text2)){
                     currentScore++;
                     setCartoonImage();
@@ -247,15 +263,34 @@ int currentScore = 0, questionAttempted = 1, currentpos,finishTime;
                     @Override
                     public void run() {
                         textBox2.setBackground(getDrawable(R.drawable.square_shape));
-                        attempted_qts.setText(questionAttempted+"/"+"10");
-                        questionAttempted++;
                         currentpos = random.nextInt(quizModelarrayList.size());
-                        setDataView(currentpos);
-                        quit.setClickable(true);
-                        textBox1.setClickable(true);
-                        textBox2.setClickable(true);
-                        textBox3.setClickable(true);
-                        textBox4.setClickable(true);
+                        if(questionAttempted == 11){
+                            final Handler handler = new Handler(Looper.getMainLooper());
+                            finishTime = finishTime - count;
+                            countDownTimer.cancel();
+                            quit.setClickable(false);
+                            textBox1.setClickable(false);
+                            textBox2.setClickable(false);
+                            textBox3.setClickable(false);
+                            textBox4.setClickable(false);
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                            Intent intent = new Intent(MainActivity.this,page4.class);
+                            intent.putExtra("score", currentScore);
+                            intent.putExtra("countTime",finishTime);
+                            startActivity(intent);
+                            finish();
+                                }
+                            }, 1000);
+                        }else{
+                            setDataView(currentpos);
+                            quit.setClickable(true);
+                            textBox1.setClickable(true);
+                            textBox2.setClickable(true);
+                            textBox3.setClickable(true);
+                            textBox4.setClickable(true);
+                        }
                     }
                 }, 2000);
             }
@@ -270,6 +305,11 @@ int currentScore = 0, questionAttempted = 1, currentpos,finishTime;
                 textBox3.setClickable(false);
                 textBox4.setClickable(false);
                 _text3 = text5.getText().toString().trim() + text6.getText().toString().trim();
+                if(questionAttempted != 1) {
+                    attempted_qts.setText(questionAttempted + "/" + "10");
+                    questionAttempted++;
+                }else{
+                }
                 if(quizModelarrayList.get(currentpos).getAnswer().trim().equals(_text3)){
                     currentScore++;
                     setCartoonImage();
@@ -283,15 +323,34 @@ int currentScore = 0, questionAttempted = 1, currentpos,finishTime;
                     @Override
                     public void run() {
                         textBox3.setBackground(getDrawable(R.drawable.square_shape));
-                        attempted_qts.setText(questionAttempted+"/"+"10");
-                        questionAttempted++;
                         currentpos = random.nextInt(quizModelarrayList.size());
-                        setDataView(currentpos);
-                        quit.setClickable(true);
-                        textBox1.setClickable(true);
-                        textBox2.setClickable(true);
-                        textBox3.setClickable(true);
-                        textBox4.setClickable(true);
+                        if(questionAttempted == 11){
+                            final Handler handler = new Handler(Looper.getMainLooper());
+                            finishTime = finishTime - count;
+                            countDownTimer.cancel();
+                            quit.setClickable(false);
+                            textBox1.setClickable(false);
+                            textBox2.setClickable(false);
+                            textBox3.setClickable(false);
+                            textBox4.setClickable(false);
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                            Intent intent = new Intent(MainActivity.this,page4.class);
+                            intent.putExtra("score", currentScore);
+                            intent.putExtra("countTime",finishTime);
+                            startActivity(intent);
+                            finish();
+                                }
+                            }, 1000);
+                        }else{
+                            setDataView(currentpos);
+                            quit.setClickable(true);
+                            textBox1.setClickable(true);
+                            textBox2.setClickable(true);
+                            textBox3.setClickable(true);
+                            textBox4.setClickable(true);
+                        }
                     }
                 }, 2000);
             }
@@ -306,6 +365,13 @@ int currentScore = 0, questionAttempted = 1, currentpos,finishTime;
                 textBox3.setClickable(false);
                 textBox4.setClickable(false);
                 _text4 = text7.getText().toString().trim() + text8.getText().toString().trim();
+                if(questionAttempted == 1) {
+                    questionAttempted++;
+                }
+                else{
+                    attempted_qts.setText(questionAttempted + "/" + "10");
+                    questionAttempted++;
+                }
                 if(quizModelarrayList.get(currentpos).getAnswer().trim().equals(_text4)){
                     currentScore++;
                     setCartoonImage();
@@ -319,15 +385,34 @@ int currentScore = 0, questionAttempted = 1, currentpos,finishTime;
                     @Override
                     public void run() {
                         textBox4.setBackground(getDrawable(R.drawable.square_shape));
-                        attempted_qts.setText(questionAttempted+"/"+"10");
-                        questionAttempted++;
                         currentpos = random.nextInt(quizModelarrayList.size());
-                        setDataView(currentpos);
-                        quit.setClickable(true);
-                        textBox1.setClickable(true);
-                        textBox2.setClickable(true);
-                        textBox3.setClickable(true);
-                        textBox4.setClickable(true);
+                        if(questionAttempted == 11){
+                            final Handler handler = new Handler(Looper.getMainLooper());
+                            finishTime = finishTime - count;
+                            countDownTimer.cancel();
+                            quit.setClickable(false);
+                            textBox1.setClickable(false);
+                            textBox2.setClickable(false);
+                            textBox3.setClickable(false);
+                            textBox4.setClickable(false);
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                            Intent intent = new Intent(MainActivity.this,page4.class);
+                            intent.putExtra("score", currentScore);
+                            intent.putExtra("countTime",finishTime);
+                            startActivity(intent);
+                            finish();
+                                }
+                            }, 1000);
+                        }else{
+                            setDataView(currentpos);
+                            quit.setClickable(true);
+                            textBox1.setClickable(true);
+                            textBox2.setClickable(true);
+                            textBox3.setClickable(true);
+                            textBox4.setClickable(true);
+                        }
                     }
                 }, 2000);
             }
@@ -488,35 +573,35 @@ int currentScore = 0, questionAttempted = 1, currentpos,finishTime;
     }
     private void setCartoonRightAnimation() {
         if(cart == 1){
-            if(currentScore < 9) {
+            if(currentScore < 10) {
                 setRedRightAnswer();
             }else if(currentScore == 10){
                 setJumpRed();
             }
         }
         else if(cart == 2){
-            if(currentScore < 9) {
+            if(currentScore < 10) {
                 setBlueRightAnswer();
             }else if(currentScore == 10){
                 setJumpBlue();
             }
         }
         else if(cart == 3){
-            if(currentScore < 9) {
+            if(currentScore < 10) {
                 setGreenRightAnswer();
             }else if(currentScore == 10){
                 setJumpGreen();
             }
         }
         else if(cart == 4){
-            if(currentScore < 9) {
+            if(currentScore < 10) {
                 setPinkRightAnswer();
             }else if(currentScore == 10){
                 setJumpPink();
             }
         }
         else{
-            if(currentScore < 9) {
+            if(currentScore < 10) {
                 setBlackRightAnswer();
             }else if(currentScore == 10){
                 setJumpBlack();
@@ -1811,5 +1896,22 @@ int currentScore = 0, questionAttempted = 1, currentpos,finishTime;
         quizModelarrayList.add(new QuizModel("350","500","2","3","1","2","7","10","3","4","710"));
         quizModelarrayList.add(new QuizModel("400","500","1","2","7","8","3","4","4","5","45"));
         quizModelarrayList.add(new QuizModel("450","500","2","5","9","10","3","4","4","5","910"));
+    }
+    private static String getSizeName(Context context) {
+        int screenLayout = context.getResources().getConfiguration().screenLayout;
+        screenLayout &= Configuration.SCREENLAYOUT_SIZE_MASK;
+
+        switch (screenLayout) {
+            case Configuration.SCREENLAYOUT_SIZE_SMALL:
+                return "small";
+            case Configuration.SCREENLAYOUT_SIZE_NORMAL:
+                return "normal";
+            case Configuration.SCREENLAYOUT_SIZE_LARGE:
+                return "large";
+            case Configuration.SCREENLAYOUT_SIZE_XLARGE:
+                return "xlarge";
+            default:
+                return "undefined";
+        }
     }
 }

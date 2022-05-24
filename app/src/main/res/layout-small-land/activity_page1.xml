@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_2_1x"
+    tools:context=".page1">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:id="@+id/layout1">
+
+            <TextView
+                android:id="@+id/decrement"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="70dp"
+                android:fontFamily="@font/morning_rainbow"
+                android:gravity="center"
+                android:text="-"
+                android:textColor="@color/white"
+                android:textSize="50dp"
+                android:visibility="invisible"></TextView>
+
+            <TextView
+                android:id="@+id/set"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="0dp"
+                android:layout_toEndOf="@+id/decrement"
+                android:fontFamily="@font/morning_rainbow"
+                android:gravity="center"
+                android:text="Set: "
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="26dp"></TextView>
+
+            <TextView
+                android:id="@+id/no."
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="0dp"
+                android:layout_toEndOf="@+id/set"
+                android:fontFamily="@font/morning_rainbow"
+                android:gravity="center"
+                android:text="1"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="26dp"></TextView>
+
+            <TextView
+                android:id="@+id/add_sign"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="5dp"
+                android:layout_toEndOf="@+id/no."
+                android:fontFamily="@font/morning_rainbow"
+                android:gravity="center"
+                android:text="+"
+                android:textColor="@color/white"
+                android:textSize="50dp"></TextView>
+
+            <TextView
+                android:id="@+id/decrement_level"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/add_sign"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/morning_rainbow"
+                android:gravity="center"
+                android:text="-"
+                android:textColor="@color/white"
+                android:textSize="50dp"
+                android:visibility="invisible"></TextView>
+
+            <TextView
+                android:id="@+id/note"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/set"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="20dp"
+                android:layout_toEndOf="@+id/decrement_level"
+                android:fontFamily="@font/morning_rainbow"
+                android:gravity="center"
+                android:text="Difficulty:"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="26dp"></TextView>
+
+            <TextView
+                android:id="@+id/note1"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_below="@+id/note"
+                android:layout_marginStart="130dp"
+                android:fontFamily="@font/morning_rainbow"
+                android:gravity="center"
+                android:text="Novice"
+                android:textColor="@color/white"
+                android:textSize="22dp"></TextView>
+
+            <TextView
+                android:id="@+id/increment_level"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@id/add_sign"
+                android:layout_marginTop="20dp"
+                android:layout_toEndOf="@+id/note"
+                android:fontFamily="@font/morning_rainbow"
+                android:gravity="center"
+                android:text="+"
+                android:textColor="@color/white"
+                android:textSize="50dp"></TextView>
+        </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:id="@+id/note2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="40dp"
+            android:fontFamily="@font/morning_rainbow"
+            android:text="High Score 0/10 ( "
+            android:textColor="@color/white"
+            android:textSize="18dp"></TextView>
+
+        <TextView
+            android:id="@+id/second"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@+id/note2"
+            android:fontFamily="@font/morning_rainbow"
+            android:text="95"
+            android:textColor="@color/white"
+            android:textSize="18dp"></TextView>
+
+        <TextView
+            android:id="@+id/seconds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@+id/second"
+            android:fontFamily="@font/morning_rainbow"
+            android:text=" seconds)"
+            android:textColor="@color/white"
+            android:textSize="18dp"></TextView>
+    </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/layout1">
+
+                <Button
+                    android:id="@+id/btn_next"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/next_btn"
+                    android:fontFamily="@font/morning_rainbow"
+                    android:gravity="center"
+                    android:text="Next"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="32dp"></Button>
+
+                <Button
+                    android:id="@+id/btn_detail"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/directions_160_2x"></Button>
+            </RelativeLayout>
+    </RelativeLayout>

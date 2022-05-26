@@ -14,8 +14,8 @@
 
             <TextView
                 android:id="@+id/decrement"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="70dp"
                 android:fontFamily="@font/morning_rainbow"
                 android:gravity="center"
@@ -26,8 +26,8 @@
 
             <TextView
                 android:id="@+id/set"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
+                android:layout_width="130dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="0dp"
                 android:layout_toEndOf="@+id/decrement"
                 android:fontFamily="@font/morning_rainbow"
@@ -39,21 +39,21 @@
 
             <TextView
                 android:id="@+id/no."
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="70dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="0dp"
                 android:layout_toEndOf="@+id/set"
                 android:fontFamily="@font/morning_rainbow"
-                android:text="1"
                 android:gravity="center"
+                android:text="1"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="40dp"></TextView>
 
             <TextView
                 android:id="@+id/add_sign"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="5dp"
                 android:layout_toEndOf="@+id/no."
                 android:fontFamily="@font/morning_rainbow"
@@ -64,8 +64,8 @@
 
             <TextView
                 android:id="@+id/decrement_level"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_below="@+id/add_sign"
                 android:layout_marginStart="70dp"
                 android:layout_marginTop="20dp"
@@ -78,8 +78,8 @@
 
             <TextView
                 android:id="@+id/note"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
                 android:layout_below="@+id/set"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="20dp"
@@ -94,7 +94,7 @@
             <TextView
                 android:id="@+id/note1"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="60dp"
                 android:layout_below="@+id/note"
                 android:layout_marginStart="130dp"
                 android:fontFamily="@font/morning_rainbow"
@@ -105,8 +105,8 @@
 
             <TextView
                 android:id="@+id/increment_level"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_below="@id/add_sign"
                 android:layout_marginTop="20dp"
                 android:layout_toEndOf="@+id/note"
@@ -131,7 +131,7 @@
             android:fontFamily="@font/morning_rainbow"
             android:text="High Score 0/10 ( "
             android:textColor="@color/white"
-            android:textSize="30dp"></TextView>
+            android:textSize="36dp"></TextView>
 
         <TextView
             android:id="@+id/second"
@@ -142,7 +142,7 @@
             android:fontFamily="@font/morning_rainbow"
             android:text="120"
             android:textColor="@color/white"
-            android:textSize="30dp"></TextView>
+            android:textSize="36dp"></TextView>
 
         <TextView
             android:id="@+id/seconds"
@@ -151,9 +151,9 @@
             android:layout_alignParentBottom="true"
             android:layout_toEndOf="@+id/second"
             android:fontFamily="@font/morning_rainbow"
-            android:text=" seconds)"
+            android:text=" seconds )"
             android:textColor="@color/white"
-            android:textSize="30dp"></TextView>
+            android:textSize="36dp"></TextView>
     </RelativeLayout>
 
     <RelativeLayout

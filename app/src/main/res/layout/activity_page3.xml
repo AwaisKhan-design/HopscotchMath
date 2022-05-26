@@ -32,61 +32,66 @@
         android:textStyle="bold">
     </TextView>
     </RelativeLayout>
+
     <LinearLayout
+        android:id="@+id/cartoonLayout"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:id="@+id/cartoonLayout"
         android:layout_centerVertical="true"
-        android:layout_margin="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="50dp"
         android:gravity="bottom"
         android:weightSum="5">
-    <ImageView
-        android:id="@+id/carton1"
-        android:layout_width="120dp"
-        android:layout_height="170dp"
-        android:layout_below="@+id/choose_character"
-        android:layout_weight="1"
-        android:layout_centerVertical="true"
-        android:src="@drawable/dance_red_00021"></ImageView>
+
+        <ImageView
+            android:id="@+id/carton1"
+            android:layout_width="140dp"
+            android:layout_height="200dp"
+            android:layout_below="@+id/choose_character"
+            android:layout_centerVertical="true"
+            android:layout_weight="1"
+            android:src="@drawable/jump_red_00037"></ImageView>
 
         <ImageView
             android:id="@+id/cartoon2"
-            android:layout_width="120dp"
-            android:layout_height="170dp"
-            android:layout_toEndOf="@+id/carton1"
-            android:layout_weight="1"
+            android:layout_width="140dp"
+            android:layout_height="200dp"
             android:layout_below="@+id/choose_character"
             android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/carton1"
+            android:layout_weight="1"
             android:src="@drawable/bluebean_h150"></ImageView>
 
         <ImageView
             android:id="@+id/cartoon3"
-            android:layout_width="120dp"
-            android:layout_height="170dp"
+            android:layout_width="140dp"
+            android:layout_height="200dp"
+            android:layout_below="@+id/choose_character"
             android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/cartoon2"
             android:layout_weight="1"
-            android:layout_below="@+id/choose_character"
             android:src="@drawable/greenbean_h150"></ImageView>
 
         <ImageView
             android:id="@+id/cartoon4"
-            android:layout_width="120dp"
-            android:layout_height="170dp"
-            android:layout_centerVertical="true"
-            android:layout_weight="1"
-            android:layout_toEndOf="@+id/cartoon3"
+            android:layout_width="140dp"
+            android:layout_height="200dp"
             android:layout_below="@+id/choose_character"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/cartoon3"
+            android:layout_weight="1"
             android:src="@drawable/pinkbean_h150"></ImageView>
 
         <ImageView
             android:id="@+id/cartoon5"
-            android:layout_width="120dp"
-            android:layout_height="170dp"
-            android:layout_weight="1"
-            android:layout_toEndOf="@+id/cartoon4"
-            android:layout_centerVertical="true"
+            android:layout_width="140dp"
+            android:layout_height="200dp"
             android:layout_below="@+id/choose_character"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/cartoon4"
+            android:layout_weight="1"
             android:src="@drawable/blackbean_h150"></ImageView>
     </LinearLayout>
 </RelativeLayout>

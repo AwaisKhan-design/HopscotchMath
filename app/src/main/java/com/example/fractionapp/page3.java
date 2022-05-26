@@ -561,7 +561,7 @@ previousScore previousScore;
     }
     private void difficulty(){
         if(level.equals("Novice")){
-            level = "95";
+            level = "120";
         }else if(level.equals("Confident")){
             level = "90";
         }else{

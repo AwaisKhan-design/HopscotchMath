@@ -137,7 +137,7 @@ public class page1 extends AppCompatActivity {
                             increment_level.setVisibility(View.VISIBLE);
                             break;
                         case "Confident":
-                            second.setText("95");
+                            second.setText("120");
                             note1.setText("Novice");
                             level = note1.getText().toString();
                             increment_level.setVisibility(View.VISIBLE);

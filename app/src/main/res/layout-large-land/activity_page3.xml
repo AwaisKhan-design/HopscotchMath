@@ -47,7 +47,7 @@
         android:layout_below="@+id/choose_character"
         android:layout_weight="1"
         android:layout_centerVertical="true"
-        android:src="@drawable/dance_red_00021"></ImageView>
+        android:src="@drawable/jump_red_00037"></ImageView>
 
         <ImageView
             android:id="@+id/cartoon2"

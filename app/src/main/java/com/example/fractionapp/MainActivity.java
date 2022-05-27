@@ -43,6 +43,7 @@ int currentScore = 0, currentpos,finishTime;
         previousScore = new previousScore(this);
         try {
            String size =  getSizeName(this);
+            Toast.makeText(this, ""+size, Toast.LENGTH_SHORT).show();
             cart = Integer.parseInt(previousScore.getcartoon());
             count = Integer.parseInt(previousScore.getLevel());
             finishTime = count;
@@ -116,7 +117,7 @@ int currentScore = 0, currentpos,finishTime;
     }
     private void setCartoon() {
         if(cart == 1){
-            cartoon_place.setImageResource(R.drawable.dance_red_00021);
+            cartoon_place.setImageResource(R.drawable.jump_red_00037);
         }
         else if(cart == 2){
             cartoon_place.setImageResource(R.drawable.bluebean_h150);
@@ -364,11 +365,11 @@ int currentScore = 0, currentpos,finishTime;
                 textBox3.setClickable(false);
                 textBox4.setClickable(false);
                 _text4 = text7.getText().toString().trim() + text8.getText().toString().trim();
-                if(questionAttempted == 1) {
+                if(questionAttempted != 1) {
+                    attempted_qts.setText(questionAttempted + "/" + "10");
                     questionAttempted++;
                 }
                 else{
-                    attempted_qts.setText(questionAttempted + "/" + "10");
                     questionAttempted++;
                 }
                 if(quizModelarrayList.get(currentpos).getAnswer().trim().equals(_text4)){
@@ -442,13 +443,13 @@ int currentScore = 0, currentpos,finishTime;
             } else if (viewPager.getTag().equals("tablet")) {
                 RelativeLayout.LayoutParams lpp = new RelativeLayout.LayoutParams(cartoon_place.getLayoutParams());
                 if(height > 1100 && height <= 1380) {
-                    lpp.setMargins(50, 460, 0, 0);
+                    lpp.setMargins(260, 580, 0, 0);
                     cartoon_place.setLayoutParams(lpp);
                 }else if(height > 1380 && height <= 1500){
-                    lpp.setMargins(80, 680, 0, 0);
+                    lpp.setMargins(260, 840, 0, 0);
                     cartoon_place.setLayoutParams(lpp);
                 }else if(height > 1500 && height <= 1900){
-                    lpp.setMargins(150, 760, 0, 0);
+                    lpp.setMargins(360, 960, 0, 0);
                     cartoon_place.setLayoutParams(lpp);
                 }else {
 
@@ -476,13 +477,13 @@ int currentScore = 0, currentpos,finishTime;
             } else if (viewPager.getTag().equals("tablet")) {
                 RelativeLayout.LayoutParams lpp = new RelativeLayout.LayoutParams(cartoon_place.getLayoutParams());
                 if(height > 1100 && height <= 1380) {
-                    lpp.setMargins(50, 460, 0, 0);
+                    lpp.setMargins(200, 460, 0, 0);
                     cartoon_place.setLayoutParams(lpp);
                 }else if(height > 1380 && height <= 1500){
-                    lpp.setMargins(80, 680, 0, 0);
+                    lpp.setMargins(220, 680, 0, 0);
                     cartoon_place.setLayoutParams(lpp);
                 }else if(height > 1500 && height <= 1900){
-                    lpp.setMargins(150, 760, 0, 0);
+                    lpp.setMargins(280, 760, 0, 0);
                     cartoon_place.setLayoutParams(lpp);
                 }else {
 
@@ -510,13 +511,13 @@ int currentScore = 0, currentpos,finishTime;
             } else if (viewPager.getTag().equals("tablet")) {
                 RelativeLayout.LayoutParams lpp = new RelativeLayout.LayoutParams(cartoon_place.getLayoutParams());
                 if(height > 1100 && height <= 1380) {
-                    lpp.setMargins(280, 460, 0, 0);
+                    lpp.setMargins(440, 460, 0, 0);
                     cartoon_place.setLayoutParams(lpp);
                 }else if(height > 1380 && height <= 1500){
-                    lpp.setMargins(350, 680, 0, 0);
+                    lpp.setMargins(470, 680, 0, 0);
                     cartoon_place.setLayoutParams(lpp);
                 }else if(height > 1500 && height <= 1900){
-                    lpp.setMargins(470, 760, 0, 0);
+                    lpp.setMargins(650, 760, 0, 0);
                     cartoon_place.setLayoutParams(lpp);
                 }else {
 
@@ -544,13 +545,13 @@ int currentScore = 0, currentpos,finishTime;
             } else if (viewPager.getTag().equals("tablet")) {
                 RelativeLayout.LayoutParams lpp = new RelativeLayout.LayoutParams(cartoon_place.getLayoutParams());
                 if(height > 1100 && height <= 1380) {
-                    lpp.setMargins(230, 340, 0, 0);
+                    lpp.setMargins(380, 340, 0, 0);
                     cartoon_place.setLayoutParams(lpp);
                 }else if(height > 1380 && height <= 1500){
-                    lpp.setMargins(280, 560, 0, 0);
+                    lpp.setMargins(440, 560, 0, 0);
                     cartoon_place.setLayoutParams(lpp);
                 }else if(height > 1500 && height <= 1900){
-                    lpp.setMargins(400, 600, 0, 0);
+                    lpp.setMargins(560, 600, 0, 0);
                     cartoon_place.setLayoutParams(lpp);
                 }else {
 
@@ -578,13 +579,13 @@ int currentScore = 0, currentpos,finishTime;
             } else if (viewPager.getTag().equals("tablet")) {
                 RelativeLayout.LayoutParams lpp = new RelativeLayout.LayoutParams(cartoon_place.getLayoutParams());
                 if(height > 1100 && height <= 1380) {
-                    lpp.setMargins(180, 250, 0, 0);
+                    lpp.setMargins(340, 240, 0, 0);
                     cartoon_place.setLayoutParams(lpp);
                 }else if(height > 1380 && height <= 1500){
-                    lpp.setMargins(350, 450, 0, 0);
+                    lpp.setMargins(370, 450, 0, 0);
                     cartoon_place.setLayoutParams(lpp);
                 }else if(height > 1500 && height <= 1900){
-                    lpp.setMargins(350, 470, 0, 0);
+                    lpp.setMargins(480, 470, 0, 0);
                     cartoon_place.setLayoutParams(lpp);
                 }else {
                 }
@@ -600,7 +601,7 @@ int currentScore = 0, currentpos,finishTime;
                     lp.setMargins(400, 160, 0, 0);
                     cartoon_place.setLayoutParams(lp);
                 } else if (height > 1000 && height <= 1080) {
-                    lp.setMargins(560, 280, 0, 0);
+                    lp.setMargins(520, 280, 0, 0);
                     cartoon_place.setLayoutParams(lp);
                 } else if (height > 1080 && height <= 1450) {
                     lp.setMargins(600, 360, 0, 0);
@@ -611,13 +612,13 @@ int currentScore = 0, currentpos,finishTime;
             } else if (viewPager.getTag().equals("tablet")) {
                 RelativeLayout.LayoutParams lpp = new RelativeLayout.LayoutParams(cartoon_place.getLayoutParams());
                 if(height > 1100 && height <= 1380) {
-                    lpp.setMargins(380, 250, 0, 0);
+                    lpp.setMargins(550, 240, 0, 0);
                     cartoon_place.setLayoutParams(lpp);
                 }else if(height > 1380 && height <= 1500){
-                    lpp.setMargins(640, 450, 0, 0);
+                    lpp.setMargins(620, 450, 0, 0);
                     cartoon_place.setLayoutParams(lpp);
                 }else if(height > 1500 && height <= 1900){
-                    lpp.setMargins(600, 470, 0, 0);
+                    lpp.setMargins(780, 470, 0, 0);
                     cartoon_place.setLayoutParams(lpp);
                 }else {
                 }
@@ -644,13 +645,13 @@ int currentScore = 0, currentpos,finishTime;
             } else if (viewPager.getTag().equals("tablet")) {
                 RelativeLayout.LayoutParams lpp = new RelativeLayout.LayoutParams(cartoon_place.getLayoutParams());
                 if(height > 1100 && height <= 1380) {
-                    lpp.setMargins(350, 160, 0, 0);
+                    lpp.setMargins(490, 160, 0, 0);
                     cartoon_place.setLayoutParams(lpp);
                 }else if(height > 1380 && height <= 1500){
-                    lpp.setMargins(380, 360, 0, 0);
+                    lpp.setMargins(560, 360, 0, 0);
                     cartoon_place.setLayoutParams(lpp);
                 }else if(height > 1500 && height <= 1900){
-                    lpp.setMargins(540, 370, 0, 0);
+                    lpp.setMargins(720, 360, 0, 0);
                     cartoon_place.setLayoutParams(lpp);
                 }else {
                 }
@@ -676,13 +677,13 @@ int currentScore = 0, currentpos,finishTime;
                 } else if (viewPager.getTag().equals("tablet")) {
                     RelativeLayout.LayoutParams lpp = new RelativeLayout.LayoutParams(cartoon_place.getLayoutParams());
                     if(height > 1100 && height <= 1380) {
-                        lpp.setMargins(300, 80, 0, 0);
+                        lpp.setMargins(460, 70, 0, 0);
                         cartoon_place.setLayoutParams(lpp);
                     }else if(height > 1380 && height <= 1500){
-                        lpp.setMargins(330, 280, 0, 0);
+                        lpp.setMargins(510, 280, 0, 0);
                         cartoon_place.setLayoutParams(lpp);
                     }else if(height > 1500 && height <= 1900){
-                        lpp.setMargins(480, 250, 0, 0);
+                        lpp.setMargins(640, 250, 0, 0);
                         cartoon_place.setLayoutParams(lpp);
                     }else {
                     }
@@ -708,13 +709,13 @@ int currentScore = 0, currentpos,finishTime;
                 } else if (viewPager.getTag().equals("tablet")) {
                     RelativeLayout.LayoutParams lpp = new RelativeLayout.LayoutParams(cartoon_place.getLayoutParams());
                     if(height > 1100 && height <= 1380) {
-                        lpp.setMargins(480, 80, 0, 0);
+                        lpp.setMargins(640, 70, 0, 0);
                         cartoon_place.setLayoutParams(lpp);
                     }else if(height > 1380 && height <= 1500){
-                        lpp.setMargins(520, 280, 0, 0);
+                        lpp.setMargins(680, 280, 0, 0);
                         cartoon_place.setLayoutParams(lpp);
                     }else if(height > 1500 && height <= 1900){
-                        lpp.setMargins(740, 250, 0, 0);
+                        lpp.setMargins(880, 250, 0, 0);
                         cartoon_place.setLayoutParams(lpp);
                     }else {
                     }
@@ -740,13 +741,13 @@ int currentScore = 0, currentpos,finishTime;
                 } else if (viewPager.getTag().equals("tablet")) {
                     RelativeLayout.LayoutParams lpp = new RelativeLayout.LayoutParams(cartoon_place.getLayoutParams());
                     if(height >= 1100 && height <= 1380) {
-                        lpp.setMargins(420, 20, 0, 0);
+                        lpp.setMargins(560, 20, 0, 0);
                         cartoon_place.setLayoutParams(lpp);
                     }else if(height > 1380 && height <= 1500){
-                        lpp.setMargins(470, 210, 0, 0);
+                        lpp.setMargins(620, 210, 0, 0);
                         cartoon_place.setLayoutParams(lpp);
                     }else if(height > 1500 && height <= 1800){
-                        lpp.setMargins(660, 150, 0, 0);
+                        lpp.setMargins(840, 150, 0, 0);
                         cartoon_place.setLayoutParams(lpp);
                     }else {
                     }

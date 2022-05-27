@@ -57,7 +57,6 @@ int currentScore = 0, currentpos,finishTime;
             DisplayMetrics displayMetrics = new DisplayMetrics();
             getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
             height = displayMetrics.heightPixels;
-            Toast.makeText(this, ""+size +" "+height, Toast.LENGTH_SHORT).show();
             setLevels();
             random = new Random();
             currentpos = random.nextInt(quizModelarrayList.size());
@@ -423,6 +422,38 @@ int currentScore = 0, currentpos,finishTime;
 
         if (currentScore == 1) {
             counting_Image.setImageDrawable(getDrawable(R.drawable.hopsc_01_h600));
+            if (viewPager.getTag().equals("phone")) {
+                RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(cartoon_place.getLayoutParams());
+                if (height <= 700) {
+                    lp.setMargins(70, 270, 0, 0);
+                    cartoon_place.setLayoutParams(lp);
+                } else if (height > 700 && height <= 1000) {
+                    lp.setMargins(200, 380, 0, 0);
+                    cartoon_place.setLayoutParams(lp);
+                } else if (height > 1000 && height <= 1080) {
+                    lp.setMargins(260, 620, 0, 0);
+                    cartoon_place.setLayoutParams(lp);
+                } else if (height > 1080 && height <= 1450) {
+                    lp.setMargins(280, 800, 0, 0);
+                    cartoon_place.setLayoutParams(lp);
+                } else {
+
+                }
+            } else if (viewPager.getTag().equals("tablet")) {
+                RelativeLayout.LayoutParams lpp = new RelativeLayout.LayoutParams(cartoon_place.getLayoutParams());
+                if(height > 1100 && height <= 1380) {
+                    lpp.setMargins(50, 460, 0, 0);
+                    cartoon_place.setLayoutParams(lpp);
+                }else if(height > 1380 && height <= 1500){
+                    lpp.setMargins(80, 680, 0, 0);
+                    cartoon_place.setLayoutParams(lpp);
+                }else if(height > 1500 && height <= 1900){
+                    lpp.setMargins(150, 760, 0, 0);
+                    cartoon_place.setLayoutParams(lpp);
+                }else {
+
+                }
+            }
         } else if (currentScore == 2) {
             counting_Image.setImageDrawable(getDrawable(R.drawable.hopsc_02_h600));
             if (viewPager.getTag().equals("phone")) {
@@ -431,13 +462,13 @@ int currentScore = 0, currentpos,finishTime;
                     lp.setMargins(70, 270, 0, 0);
                     cartoon_place.setLayoutParams(lp);
                 } else if (height > 700 && height <= 1000) {
-                    lp.setMargins(60, 270, 0, 0);
+                    lp.setMargins(170, 290, 0, 0);
                     cartoon_place.setLayoutParams(lp);
                 } else if (height > 1000 && height <= 1080) {
-                    lp.setMargins(70, 490, 0, 0);
+                    lp.setMargins(240, 490, 0, 0);
                     cartoon_place.setLayoutParams(lp);
                 } else if (height > 1080 && height <= 1450) {
-                    lp.setMargins(60, 640, 0, 0);
+                    lp.setMargins(240, 640, 0, 0);
                     cartoon_place.setLayoutParams(lp);
                 } else {
 
@@ -465,13 +496,13 @@ int currentScore = 0, currentpos,finishTime;
                     lp.setMargins(70, 270, 0, 0);
                     cartoon_place.setLayoutParams(lp);
                 } else if (height > 700 && height <= 1000) {
-                    lp.setMargins(220, 270, 0, 0);
+                    lp.setMargins(320, 290, 0, 0);
                     cartoon_place.setLayoutParams(lp);
                 } else if (height > 1000 && height <= 1080) {
-                    lp.setMargins(270, 490, 0, 0);
+                    lp.setMargins(460, 490, 0, 0);
                     cartoon_place.setLayoutParams(lp);
                 } else if (height > 1080 && height <= 1450) {
-                    lp.setMargins(300, 640, 0, 0);
+                    lp.setMargins(480, 640, 0, 0);
                     cartoon_place.setLayoutParams(lp);
                 } else {
 
@@ -499,13 +530,13 @@ int currentScore = 0, currentpos,finishTime;
                     lp.setMargins(70, 270, 0, 0);
                     cartoon_place.setLayoutParams(lp);
                 } else if (height > 700 && height <= 1000) {
-                    lp.setMargins(190, 200, 0, 0);
+                    lp.setMargins(280, 220, 0, 0);
                     cartoon_place.setLayoutParams(lp);
                 } else if (height > 1000 && height <= 1080) {
-                    lp.setMargins(230, 390, 0, 0);
+                    lp.setMargins(400, 390, 0, 0);
                     cartoon_place.setLayoutParams(lp);
                 } else if (height > 1080 && height <= 1450) {
-                    lp.setMargins(230, 480, 0, 0);
+                    lp.setMargins(430, 480, 0, 0);
                     cartoon_place.setLayoutParams(lp);
                 } else {
 
@@ -533,13 +564,13 @@ int currentScore = 0, currentpos,finishTime;
                     lp.setMargins(70, 270, 0, 0);
                     cartoon_place.setLayoutParams(lp);
                 } else if (height > 700 && height <= 1000) {
-                    lp.setMargins(150, 140, 0, 0);
+                    lp.setMargins(260, 160, 0, 0);
                     cartoon_place.setLayoutParams(lp);
                 } else if (height > 1000 && height <= 1080) {
-                    lp.setMargins(200, 280, 0, 0);
+                    lp.setMargins(360, 280, 0, 0);
                     cartoon_place.setLayoutParams(lp);
                 } else if (height > 1080 && height <= 1450) {
-                    lp.setMargins(200, 360, 0, 0);
+                    lp.setMargins(400, 360, 0, 0);
                     cartoon_place.setLayoutParams(lp);
                 } else {
 
@@ -550,7 +581,7 @@ int currentScore = 0, currentpos,finishTime;
                     lpp.setMargins(180, 250, 0, 0);
                     cartoon_place.setLayoutParams(lpp);
                 }else if(height > 1380 && height <= 1500){
-                    lpp.setMargins(220, 450, 0, 0);
+                    lpp.setMargins(350, 450, 0, 0);
                     cartoon_place.setLayoutParams(lpp);
                 }else if(height > 1500 && height <= 1900){
                     lpp.setMargins(350, 470, 0, 0);
@@ -566,13 +597,13 @@ int currentScore = 0, currentpos,finishTime;
                     lp.setMargins(70, 270, 0, 0);
                     cartoon_place.setLayoutParams(lp);
                 } else if (height > 700 && height <= 1000) {
-                    lp.setMargins(280, 140, 0, 0);
+                    lp.setMargins(400, 160, 0, 0);
                     cartoon_place.setLayoutParams(lp);
                 } else if (height > 1000 && height <= 1080) {
-                    lp.setMargins(400, 280, 0, 0);
+                    lp.setMargins(560, 280, 0, 0);
                     cartoon_place.setLayoutParams(lp);
                 } else if (height > 1080 && height <= 1450) {
-                    lp.setMargins(400, 360, 0, 0);
+                    lp.setMargins(600, 360, 0, 0);
                     cartoon_place.setLayoutParams(lp);
                 } else {
 
@@ -583,7 +614,7 @@ int currentScore = 0, currentpos,finishTime;
                     lpp.setMargins(380, 250, 0, 0);
                     cartoon_place.setLayoutParams(lpp);
                 }else if(height > 1380 && height <= 1500){
-                    lpp.setMargins(440, 450, 0, 0);
+                    lpp.setMargins(640, 450, 0, 0);
                     cartoon_place.setLayoutParams(lpp);
                 }else if(height > 1500 && height <= 1900){
                     lpp.setMargins(600, 470, 0, 0);
@@ -599,13 +630,13 @@ int currentScore = 0, currentpos,finishTime;
                     lp.setMargins(70, 270, 0, 0);
                     cartoon_place.setLayoutParams(lp);
                 } else if (height > 700 && height <= 1000) {
-                    lp.setMargins(240, 90, 0, 0);
+                    lp.setMargins(360, 110, 0, 0);
                     cartoon_place.setLayoutParams(lp);
                 } else if (height > 1000 && height <= 1080) {
-                    lp.setMargins(340, 200, 0, 0);
+                    lp.setMargins(500, 200, 0, 0);
                     cartoon_place.setLayoutParams(lp);
                 } else if (height > 1080 && height <= 1450) {
-                    lp.setMargins(340, 250, 0, 0);
+                    lp.setMargins(540, 250, 0, 0);
                     cartoon_place.setLayoutParams(lp);
                 } else {
 
@@ -632,13 +663,13 @@ int currentScore = 0, currentpos,finishTime;
                         lp.setMargins(70, 270, 0, 0);
                         cartoon_place.setLayoutParams(lp);
                     } else if (height > 700 && height <= 1000) {
-                        lp.setMargins(220, 40, 0, 0);
+                        lp.setMargins(340, 60, 0, 0);
                         cartoon_place.setLayoutParams(lp);
                     } else if (height > 1000 && height <= 1080) {
-                        lp.setMargins(300, 140, 0, 0);
+                        lp.setMargins(460, 140, 0, 0);
                         cartoon_place.setLayoutParams(lp);
                     } else if (height > 1080 && height <= 1450) {
-                        lp.setMargins(300, 170, 0, 0);
+                        lp.setMargins(500, 170, 0, 0);
                         cartoon_place.setLayoutParams(lp);
                     } else {
                     }
@@ -664,13 +695,13 @@ int currentScore = 0, currentpos,finishTime;
                         lp.setMargins(70, 270, 0, 0);
                         cartoon_place.setLayoutParams(lp);
                     } else if (height > 700 && height <= 1000) {
-                        lp.setMargins(340, 40, 0, 0);
+                        lp.setMargins(460, 60, 0, 0);
                         cartoon_place.setLayoutParams(lp);
                     } else if (height > 1000 && height <= 1080) {
-                        lp.setMargins(450, 140, 0, 0);
+                        lp.setMargins(620, 140, 0, 0);
                         cartoon_place.setLayoutParams(lp);
                     } else if (height > 1080 && height <= 1450) {
-                        lp.setMargins(460, 170, 0, 0);
+                        lp.setMargins(660, 170, 0, 0);
                         cartoon_place.setLayoutParams(lp);
                     } else {
                     }
@@ -696,13 +727,13 @@ int currentScore = 0, currentpos,finishTime;
                         lp.setMargins(70, 270, 0, 0);
                         cartoon_place.setLayoutParams(lp);
                     } else if (height > 700 && height <= 1000) {
-                        lp.setMargins(300, 0, 0, 0);
+                        lp.setMargins(420, 20, 0, 0);
                         cartoon_place.setLayoutParams(lp);
                     } else if (height > 1000 && height <= 1080) {
-                        lp.setMargins(420, 70, 0, 0);
+                        lp.setMargins(560, 80, 0, 0);
                         cartoon_place.setLayoutParams(lp);
                     } else if (height > 1080 && height <= 1450) {
-                        lp.setMargins(420, 70, 0, 0);
+                        lp.setMargins(620, 70, 0, 0);
                         cartoon_place.setLayoutParams(lp);
                     } else {
                     }

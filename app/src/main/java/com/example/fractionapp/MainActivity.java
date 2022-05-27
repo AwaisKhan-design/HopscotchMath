@@ -43,7 +43,6 @@ int currentScore = 0, currentpos,finishTime;
         previousScore = new previousScore(this);
         try {
            String size =  getSizeName(this);
-            Toast.makeText(this, ""+size, Toast.LENGTH_SHORT).show();
             cart = Integer.parseInt(previousScore.getcartoon());
             count = Integer.parseInt(previousScore.getLevel());
             finishTime = count;
@@ -206,7 +205,6 @@ int currentScore = 0, currentpos,finishTime;
                             final Handler handler = new Handler(Looper.getMainLooper());
                             finishTime = finishTime - count;
                             countDownTimer.cancel();
-                            questionAttempted = 1;
                             quit.setClickable(false);
                             textBox1.setClickable(false);
                             textBox2.setClickable(false);
@@ -309,6 +307,7 @@ int currentScore = 0, currentpos,finishTime;
                     attempted_qts.setText(questionAttempted + "/" + "10");
                     questionAttempted++;
                 }else{
+                    questionAttempted++;
                 }
                 if(quizModelarrayList.get(currentpos).getAnswer().trim().equals(_text3)){
                     currentScore++;
@@ -568,7 +567,7 @@ int currentScore = 0, currentpos,finishTime;
                     lp.setMargins(260, 160, 0, 0);
                     cartoon_place.setLayoutParams(lp);
                 } else if (height > 1000 && height <= 1080) {
-                    lp.setMargins(360, 280, 0, 0);
+                    lp.setMargins(360, 300, 0, 0);
                     cartoon_place.setLayoutParams(lp);
                 } else if (height > 1080 && height <= 1450) {
                     lp.setMargins(400, 360, 0, 0);
@@ -601,7 +600,7 @@ int currentScore = 0, currentpos,finishTime;
                     lp.setMargins(400, 160, 0, 0);
                     cartoon_place.setLayoutParams(lp);
                 } else if (height > 1000 && height <= 1080) {
-                    lp.setMargins(520, 280, 0, 0);
+                    lp.setMargins(540, 300, 0, 0);
                     cartoon_place.setLayoutParams(lp);
                 } else if (height > 1080 && height <= 1450) {
                     lp.setMargins(600, 360, 0, 0);
@@ -634,7 +633,7 @@ int currentScore = 0, currentpos,finishTime;
                     lp.setMargins(360, 110, 0, 0);
                     cartoon_place.setLayoutParams(lp);
                 } else if (height > 1000 && height <= 1080) {
-                    lp.setMargins(500, 200, 0, 0);
+                    lp.setMargins(500, 220, 0, 0);
                     cartoon_place.setLayoutParams(lp);
                 } else if (height > 1080 && height <= 1450) {
                     lp.setMargins(540, 250, 0, 0);
@@ -667,7 +666,7 @@ int currentScore = 0, currentpos,finishTime;
                         lp.setMargins(340, 60, 0, 0);
                         cartoon_place.setLayoutParams(lp);
                     } else if (height > 1000 && height <= 1080) {
-                        lp.setMargins(460, 140, 0, 0);
+                        lp.setMargins(460, 150, 0, 0);
                         cartoon_place.setLayoutParams(lp);
                     } else if (height > 1080 && height <= 1450) {
                         lp.setMargins(500, 170, 0, 0);
@@ -699,7 +698,7 @@ int currentScore = 0, currentpos,finishTime;
                         lp.setMargins(460, 60, 0, 0);
                         cartoon_place.setLayoutParams(lp);
                     } else if (height > 1000 && height <= 1080) {
-                        lp.setMargins(620, 140, 0, 0);
+                        lp.setMargins(620, 160, 0, 0);
                         cartoon_place.setLayoutParams(lp);
                     } else if (height > 1080 && height <= 1450) {
                         lp.setMargins(660, 170, 0, 0);
@@ -731,7 +730,7 @@ int currentScore = 0, currentpos,finishTime;
                         lp.setMargins(420, 20, 0, 0);
                         cartoon_place.setLayoutParams(lp);
                     } else if (height > 1000 && height <= 1080) {
-                        lp.setMargins(560, 80, 0, 0);
+                        lp.setMargins(560, 100, 0, 0);
                         cartoon_place.setLayoutParams(lp);
                     } else if (height > 1080 && height <= 1450) {
                         lp.setMargins(620, 70, 0, 0);

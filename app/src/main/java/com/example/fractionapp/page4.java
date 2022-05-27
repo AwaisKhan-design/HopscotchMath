@@ -54,7 +54,7 @@ public class page4 extends AppCompatActivity {
         }
     }
     private void checkBestScore(int score, int bestTime) {
-        if (score >= bestScore || finishTime <= bestTime) {
+        if (score >= bestScore && finishTime >= bestTime) {
             best_score_textView.setText(score + "/" + "10");
             previousScore.savesession(String.valueOf(score));
             your_best_seconds.setText(" ("+ finishTime + ")");

@@ -59,6 +59,11 @@ public class page4 extends AppCompatActivity {
             previousScore.savesession(String.valueOf(score));
             your_best_seconds.setText(" ("+ finishTime + ")");
             previousScore.savetime(String.valueOf(finishTime));
+        }else if(score >= bestScore && finishTime >= bestTime){
+            best_score_textView.setText(score + "/" + "10");
+            previousScore.savesession(String.valueOf(score));
+            your_best_seconds.setText(" ("+ finishTime + ")");
+            previousScore.savetime(String.valueOf(finishTime));
         } else {
             best_score_textView.setText(bestScore + "/" + "10");
             your_best_seconds.setText(" ("+ best_Time + ")");

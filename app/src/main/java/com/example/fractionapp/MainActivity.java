@@ -113,6 +113,12 @@ int currentScore = 0, currentpos, finishTime;
         else if(set_level.equals("10")){
             setTen(quizModelarrayList);
         }
+        else if(set_level.equals("11")){
+            setEleven(quizModelarrayList);
+        }
+        else if(set_level.equals("12")){
+            setTwelve(quizModelarrayList);
+        }
     }
     private void setCartoon() {
         if(cart == 1){

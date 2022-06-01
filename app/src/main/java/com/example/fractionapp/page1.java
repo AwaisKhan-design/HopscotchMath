@@ -68,11 +68,11 @@ public class page1 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    if(_number < 10) {
+                    if(_number < 12) {
                         String num = String.valueOf(++_number);
                         number.setText(num);
                         decrement_btn.setVisibility(View.VISIBLE);
-                        if(_number == 10){
+                        if(_number == 12){
                             addbtn1.setVisibility(View.INVISIBLE);
                         }
                     }
@@ -85,13 +85,13 @@ public class page1 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    if (_number <= 10 || _number > 0) {
+                    if (_number <= 12 || _number > 0) {
                         String num = String.valueOf(--_number);
                         number.setText(num);
                         if(_number == 1){
                             decrement_btn.setVisibility(View.INVISIBLE);
                         }
-                        else if(_number < 10){
+                        else if(_number < 12){
                             addbtn1.setVisibility(View.VISIBLE);
                         }
                     }

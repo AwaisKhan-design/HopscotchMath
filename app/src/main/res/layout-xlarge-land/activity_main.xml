@@ -59,7 +59,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical|end"
-                        android:layout_weight="0.2"
+                        android:layout_weight="2.7"
                         android:orientation="vertical">
 
                         <TextView
@@ -68,9 +68,9 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/morning_rainbow"
                             android:gravity="center"
-                            android:text="3"
+                            android:text="1250000"
                             android:textColor="@color/white"
-                            android:textSize="45dp"></TextView>
+                            android:textSize="28dp"></TextView>
 
                         <TextView
                             android:id="@+id/question_line"
@@ -90,7 +90,7 @@
                             android:gravity="center"
                             android:text="6"
                             android:textColor="@color/white"
-                            android:textSize="45dp"></TextView>
+                            android:textSize="28dp"></TextView>
                     </LinearLayout>
 
                     <LinearLayout
@@ -107,19 +107,19 @@
                             android:gravity="center"
                             android:text="="
                             android:textColor="@color/white"
-                            android:textSize="45dp"></TextView>
+                            android:textSize="32dp"></TextView>
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical|end"
-                        android:layout_weight="1"
+                        android:layout_weight="0.1"
                         android:orientation="vertical">
 
                         <RelativeLayout
-                            android:layout_width="170dp"
-                            android:layout_height="160dp"
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
                             android:background="@drawable/square_shape">
 
                             <LinearLayout
@@ -137,7 +137,7 @@
                                     android:gravity="bottom|center_horizontal"
                                     android:text="3"
                                     android:textColor="#3f3f3f"
-                                    android:textSize="45dp"></TextView>
+                                    android:textSize="34dp"></TextView>
 
                                 <TextView
                                     android:layout_width="70dp"
@@ -155,13 +155,13 @@
                                     android:gravity="top|center_horizontal"
                                     android:text="2"
                                     android:textColor="#3f3f3f"
-                                    android:textSize="45dp"></TextView>
+                                    android:textSize="34dp"></TextView>
                             </LinearLayout>
                         </RelativeLayout>
 
                         <RelativeLayout
-                            android:layout_width="170dp"
-                            android:layout_height="160dp"
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
                             android:layout_marginTop="5dp"
                             android:background="@drawable/square_shape">
 
@@ -181,7 +181,7 @@
                                     android:gravity="bottom|center_horizontal"
                                     android:text="3"
                                     android:textColor="#3f3f3f"
-                                    android:textSize="45dp"></TextView>
+                                    android:textSize="34dp"></TextView>
 
                                 <TextView
                                     android:layout_width="70dp"
@@ -199,7 +199,7 @@
                                     android:gravity="top|center_horizontal"
                                     android:text="2"
                                     android:textColor="#3f3f3f"
-                                    android:textSize="46dp"></TextView>
+                                    android:textSize="34dp"></TextView>
                             </LinearLayout>
                         </RelativeLayout>
                     </LinearLayout>
@@ -209,12 +209,12 @@
                         android:layout_height="match_parent"
                         android:layout_marginStart="5dp"
                         android:gravity="center_vertical"
-                        android:layout_weight="1"
+                        android:layout_weight="0.1"
                         android:orientation="vertical">
 
                         <RelativeLayout
-                            android:layout_width="170dp"
-                            android:layout_height="160dp"
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
                             android:background="@drawable/square_shape">
 
                             <LinearLayout
@@ -232,7 +232,7 @@
                                     android:gravity="bottom|center_horizontal"
                                     android:text="3"
                                     android:textColor="#3f3f3f"
-                                    android:textSize="46dp"></TextView>
+                                    android:textSize="34dp"></TextView>
 
                                 <TextView
                                     android:layout_width="70dp"
@@ -250,13 +250,13 @@
                                     android:gravity="top|center_horizontal"
                                     android:text="2"
                                     android:textColor="#3f3f3f"
-                                    android:textSize="46dp"></TextView>
+                                    android:textSize="34dp"></TextView>
                             </LinearLayout>
                         </RelativeLayout>
 
                         <RelativeLayout
-                            android:layout_width="170dp"
-                            android:layout_height="160dp"
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
                             android:layout_marginTop="5dp"
                             android:background="@drawable/square_shape">
 
@@ -276,7 +276,7 @@
                                     android:gravity="bottom|center_horizontal"
                                     android:text="3"
                                     android:textColor="#3f3f3f"
-                                    android:textSize="46dp"></TextView>
+                                    android:textSize="34dp"></TextView>
 
                                 <TextView
                                     android:layout_width="70dp"
@@ -294,7 +294,7 @@
                                     android:gravity="top|center_horizontal"
                                     android:text="2"
                                     android:textColor="#3f3f3f"
-                                    android:textSize="46dp"></TextView>
+                                    android:textSize="34dp"></TextView>
                             </LinearLayout>
                         </RelativeLayout>
                     </LinearLayout>

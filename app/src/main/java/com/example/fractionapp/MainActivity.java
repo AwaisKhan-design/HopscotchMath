@@ -2264,6 +2264,60 @@ int currentScore = 0, currentpos, finishTime;
         quizModelarrayList.add(new QuizModel("400","500","4","5","3","4","7","8","1","2","45"));
         quizModelarrayList.add(new QuizModel("450","500","4","5","3","4","9","10","2","5","910"));
     }
+    public void setEleven(ArrayList<QuizModel> quizModelarrayList){
+        quizModelarrayList.add(new QuizModel("20","120","1","3","2","5","1","6","1","4","16"));
+        quizModelarrayList.add(new QuizModel("48","120","2","5","2","3","3","5","5","6","25"));
+        quizModelarrayList.add(new QuizModel("60","120","1","4","1","2","1","5","1","3","12"));
+        quizModelarrayList.add(new QuizModel("72","120","2","3","3","5","3","8","2","5","35"));
+        quizModelarrayList.add(new QuizModel("90","120","1","3","1","2","2","3","3","4","34"));
+        quizModelarrayList.add(new QuizModel("120","400","3","10","3","5","2","7","5","6","310"));
+        quizModelarrayList.add(new QuizModel("150","400","2","3","3","8","5","8","3","5","38"));
+        quizModelarrayList.add(new QuizModel("180","400","2","3","3","4","9","20","8","11","920"));
+        quizModelarrayList.add(new QuizModel("150","450","1","4","1","5","1","3","1","2","13"));
+        quizModelarrayList.add(new QuizModel("180","450","2","3","2","5","3","4","3","5","25"));
+        quizModelarrayList.add(new QuizModel("150","600","1","4","1","2","1","3","1","8","14"));
+        quizModelarrayList.add(new QuizModel("360","600","3","8","1","4","2","5","3","5","35"));
+        quizModelarrayList.add(new QuizModel("480","600","2","3","3","4","2","5","4","5","45"));
+        quizModelarrayList.add(new QuizModel("540","600","9","10","4","5","5","6","2","3","910"));
+        quizModelarrayList.add(new QuizModel("450","750","11","15","3","5","2","3","2","5","35"));
+        quizModelarrayList.add(new QuizModel("500","750","4","5","3","5","2","3","2","5","23"));
+        quizModelarrayList.add(new QuizModel("600","750","2","3","4","5","5","6","3","4","45"));
+        quizModelarrayList.add(new QuizModel("320","800","5","8","3","8","2","3","2","5","25"));
+        quizModelarrayList.add(new QuizModel("360","800","5","6","3","5","9","20","3","8","920"));
+        quizModelarrayList.add(new QuizModel("750","800","15","16","5","8","5","16","5","6","1516"));
+        quizModelarrayList.add(new QuizModel("180","900","1","2","1","5","1","3","1","4","15"));
+        quizModelarrayList.add(new QuizModel("200","900","3","8","1","3","2","9","1","4","29"));
+        quizModelarrayList.add(new QuizModel("450","900","1","2","1","3","9","10","2","5","12"));
+        quizModelarrayList.add(new QuizModel("600","900","5","6","3","5","3","4","2","3","23"));
+        quizModelarrayList.add(new QuizModel("850","900","16","17","17","18","15","16","8","9","1718"));
+    }
+    public void setTwelve(ArrayList<QuizModel> quizModelarrayList){
+        quizModelarrayList.add(new QuizModel("350","1000","3","5","7","10","3","10","1","3","16"));
+        quizModelarrayList.add(new QuizModel("450","1000","9","20","3","5","4","5","9","10","25"));
+        quizModelarrayList.add(new QuizModel("600","1000","2","3","3","4","2","5","3","5","12"));
+        quizModelarrayList.add(new QuizModel("750","1000","5","6","3","5","2","3","3","4","35"));
+        quizModelarrayList.add(new QuizModel("950","1000","5","6","7","6","19","20","9","10","34"));
+        quizModelarrayList.add(new QuizModel("250","2000","1","8","1","4","1","6","1","3","310"));
+        quizModelarrayList.add(new QuizModel("400","2000","1","3","1","5","3","10","1","4","38"));
+        quizModelarrayList.add(new QuizModel("1500","2500","2","5","3","5","7","10","3","10","920"));
+        quizModelarrayList.add(new QuizModel("2000","2500","1","2","6","10","4","5","2","3","13"));
+        quizModelarrayList.add(new QuizModel("150","3000","1","20","1","3","1","10","1","8","25"));
+        quizModelarrayList.add(new QuizModel("800","4000","1","6","1","4","1","5","1","3","14"));
+        quizModelarrayList.add(new QuizModel("1200","4000","2","5","1","4","3","10","1","3","35"));
+        quizModelarrayList.add(new QuizModel("1000","4500","1","5","1","3","1","8","2","9","45"));
+        quizModelarrayList.add(new QuizModel("1500","5000","2","5","3","10","1","5","1","10","910"));
+        quizModelarrayList.add(new QuizModel("4800","6000","4","5","3","5","3","4","5","6","35"));
+        quizModelarrayList.add(new QuizModel("8400","10000","19","25","21","25","19","20","3","4","23"));
+        quizModelarrayList.add(new QuizModel("9500","10000","9","10","17","20","19","20","3","4","45"));
+        quizModelarrayList.add(new QuizModel("7200","12000","7","8","6","7","4","5","3","5","25"));
+        quizModelarrayList.add(new QuizModel("4500","15000","3","10","2","5","1","3","1","5","920"));
+        quizModelarrayList.add(new QuizModel("14500","15000","9","10","29","30","19","20","8","15","1516"));
+        quizModelarrayList.add(new QuizModel("54000","60000","9","10","7","10","19","20","4","5","15"));
+        quizModelarrayList.add(new QuizModel("68000","80000","17","20","15","16","7","8","9","10","29"));
+        quizModelarrayList.add(new QuizModel("84000","120000","7","8","7","12","7","10","9","10","12"));
+        quizModelarrayList.add(new QuizModel("27000","360000","1","9","3","40","1","10","1","5","23"));
+        quizModelarrayList.add(new QuizModel("1250000","2000000","21","25","4","5","5","8","3","5","1718"));
+    }
     private static String getSizeName(Context context) {
         int screenLayout = context.getResources().getConfiguration().screenLayout;
         screenLayout &= Configuration.SCREENLAYOUT_SIZE_MASK;

@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_2_1x"
     tools:context=".page1">
+    <TextView
+        android:id="@+id/weblink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:fontFamily="@font/morning_rainbow"
+        android:text="@string/hyperlink"
+        android:layout_marginBottom="10dp"
+        android:layout_centerInParent="true"
+        android:textColorLink="@color/purple_500"
+        android:textSize="16dp"></TextView>
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -126,11 +137,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="40dp"
+            android:layout_marginStart="20dp"
             android:fontFamily="@font/morning_rainbow"
-            android:text="High Score 0/10 ( "
+            android:text="High Score 0/10 ("
             android:textColor="@color/white"
-            android:textSize="22dp"></TextView>
+            android:textSize="20dp"></TextView>
 
         <TextView
             android:id="@+id/second"
@@ -141,7 +152,7 @@
             android:fontFamily="@font/morning_rainbow"
             android:text="120"
             android:textColor="@color/white"
-            android:textSize="22dp"></TextView>
+            android:textSize="20dp"></TextView>
 
         <TextView
             android:id="@+id/seconds"
@@ -152,35 +163,36 @@
             android:fontFamily="@font/morning_rainbow"
             android:text=" seconds)"
             android:textColor="@color/white"
-            android:textSize="22dp"></TextView>
+            android:textSize="20dp"></TextView>
     </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_toRightOf="@+id/layout1">
-            <Button
-                android:id="@+id/btn_next"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
-                android:background="@drawable/next_btn"
-                android:fontFamily="@font/morning_rainbow"
-                android:gravity="center"
-                android:text="Next"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="32dp">
-            </Button>
 
-                <Button
-                    android:id="@+id/btn_detail"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/directions_160_2x"></Button>
-            </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@+id/layout1">
+
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/next_btn"
+            android:fontFamily="@font/morning_rainbow"
+            android:gravity="center"
+            android:text="Next"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="32dp"></Button>
+
+        <Button
+            android:id="@+id/btn_detail"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/directions_160_2x"></Button>
+    </RelativeLayout>
     </RelativeLayout>

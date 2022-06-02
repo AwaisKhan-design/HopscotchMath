@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Hopscotch-Simplify Fractions</string>
     <string name="simplify">Simplify:</string>
+    <string name="hyperlink"><a href="https://MonumentalMath.com">MonumentalMath.com</a></string>
 </resources>

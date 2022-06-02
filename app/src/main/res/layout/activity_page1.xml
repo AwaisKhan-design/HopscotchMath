@@ -6,17 +6,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_2_1x"
     tools:context=".page1">
-    <TextView
-        android:id="@+id/weblink"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:fontFamily="@font/morning_rainbow"
-        android:text="@string/hyperlink"
-        android:layout_marginBottom="10dp"
-        android:layout_centerInParent="true"
-        android:textColorLink="@color/purple_500"
-        android:textSize="16dp"></TextView>
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -184,6 +173,18 @@
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="32dp"></Button>
+
+        <TextView
+            android:id="@+id/weblink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/morning_rainbow"
+            android:text="@string/hyperlink"
+            android:textColorLink="#006AFF"
+            android:textSize="14dp"></TextView>
 
         <Button
             android:id="@+id/btn_detail"

@@ -25,9 +25,9 @@ public class page1 extends AppCompatActivity {
         previousScore = new previousScore(getApplicationContext());
         findViews();
         if(previousScore.getScore().equals("")){
-            note2.setText("High Score 0/10 ( ");
+            note2.setText("High Score 0/10 (");
         }else{
-            note2.setText("High Scorce "+previousScore.getScore()+"/"+"10"+" ( ");
+            note2.setText("High Score "+previousScore.getScore()+"/"+"10"+" (");
         }
         _number = Integer.parseInt(number.getText().toString());
         level = note1.getText().toString();

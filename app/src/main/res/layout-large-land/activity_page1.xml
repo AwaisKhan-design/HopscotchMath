@@ -197,7 +197,7 @@
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/morning_rainbow"
             android:text="@string/hyperlink"
-            android:textColorLink="#006AFF"
+            android:textColor="#006AFF"
             android:textSize="18dp"></TextView>
 
         <Button

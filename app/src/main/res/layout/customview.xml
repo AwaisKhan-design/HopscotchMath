@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="160dp"
@@ -19,6 +20,7 @@
             android:gravity="center_horizontal|center_vertical"
             android:fontFamily="@font/morning_rainbow"
             android:text="Sets 4-6\n$1.99"
+            android:textColor="@color/black"
             android:textSize="16dp"/>
         <TextView
             android:id="@+id/seven_nine"
@@ -32,6 +34,7 @@
             android:gravity="center_horizontal|center_vertical"
             android:fontFamily="@font/morning_rainbow"
             android:text="Sets 7-9\n$1.99"
+            android:textColor="@color/black"
             android:textSize="16dp"/>
         <TextView
             android:id="@+id/ten_twelve"
@@ -45,6 +48,7 @@
             android:gravity="center_horizontal|center_vertical"
             android:fontFamily="@font/morning_rainbow"
             android:text="Sets 10-12\n$4.99"
+            android:textColor="@color/black"
             android:textSize="16dp"/>
     </LinearLayout>
 </LinearLayout>

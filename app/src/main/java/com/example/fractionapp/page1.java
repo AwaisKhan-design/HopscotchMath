@@ -82,10 +82,6 @@ public class page1 extends AppCompatActivity implements PurchasesUpdatedListener
                         //if purchase list is empty that means item is not purchased
                         //Or purchase is refunded or canceled
                         else {
-//                            previousScore.savePurchaseValueToPref(false);
-//                            previousScore.savePurchaseValueToPref_level_7_9(false);
-//                            previousScore.savePurchaseValueToPref_level_10_12(false);
-//                            previousScore.savePurchaseValueToPref_level_4_12(false);
                             if(purchase_btn_press.equals("level_4_6")){
                                 previousScore.savePurchaseValueToPref(false);
                             }else if(purchase_btn_press.equals("l_7_9")){
@@ -103,37 +99,23 @@ public class page1 extends AppCompatActivity implements PurchasesUpdatedListener
                 public void onBillingServiceDisconnected() {
                 }
             });
-
-            //item Purchased
+            //item Purchased OR Item Not Purchased
             if (previousScore.getPurchaseValueFromPref() == true) {
-                //Toast.makeText(this, "Purchase Status : Purchased"+previousScore.getPurchaseValueFromPref(), Toast.LENGTH_SHORT).show();
                 set_Limit = 6;
             }
-            //item not Purchased
-            else {
-//                Toast.makeText(this, "Purchase Status : Not Purchased", Toast.LENGTH_SHORT).show();
-            }
+            else {}
             if(previousScore.getPurchaseValueFromPref_level_7_9() == true){
                 set_Limit = 9;
             }
-            //item not Purchased
-            else {
-//                Toast.makeText(this, "Purchase Status : Not Purchased", Toast.LENGTH_SHORT).show();
-            }
+            else {}
             if(previousScore.getPurchaseValueFromPref_level_10_12() == true){
                 set_Limit = 12;
             }
-            //item not Purchased
-            else {
-//                Toast.makeText(this, "Purchase Status : Not Purchased", Toast.LENGTH_SHORT).show();
-            }
+            else {}
             if(previousScore.getPurchaseValueFromPref_level_4_12() == true){
                 set_Limit = 12;
             }
-            //item not Purchased
-            else {
-//                Toast.makeText(this, "Purchase Status : Not Purchased", Toast.LENGTH_SHORT).show();
-            }
+            else {}
         } catch (Exception e) {
             Toast.makeText(this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
@@ -204,19 +186,6 @@ public class page1 extends AppCompatActivity implements PurchasesUpdatedListener
             List<Purchase> alreadyPurchases = queryAlreadyPurchasesResult.getPurchasesList();
             if (alreadyPurchases != null) {
                 handlePurchases(alreadyPurchases);
-//                    if(purchase_btn_press.equals("level_4_6")){
-//                        previousScore.savePurchaseValueToPref(true);
-//                        handlePurchases(alreadyPurchases);
-//                    }else if(purchase_btn_press.equals("l_7_9")){
-//                        previousScore.savePurchaseValueToPref_level_7_9(true);
-//                        handlePurchases(alreadyPurchases);
-//                    }else if(purchase_btn_press.equals("l_10_12")){
-//                        previousScore.savePurchaseValueToPref_level_10_12(true);
-//                        handlePurchases(alreadyPurchases);
-//                    }else if(purchase_btn_press.equals("l_4_12")){
-//                        previousScore.savePurchaseValueToPref_level_4_12(true);
-//                        handlePurchases(alreadyPurchases);
-//                    }
             }
         }
         //if purchase cancelled
@@ -335,7 +304,6 @@ public class page1 extends AppCompatActivity implements PurchasesUpdatedListener
      */
     private boolean verifyValidSignature (String signedData, String signature){
         try {
-            // To get key go to Developer Console > Select your app > Development Tools > Services & APIs.
             String base64Key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAg0voCSR1bIFirULG+MBeGE2rq2wlWgIHOkTria2m+NUR2ru22hg+Qcf28cObh8c166/meT2FdH4bC8jB47uo/bGBH2WcgfI1nj3uemfONx22NpjpQ/mbvuVOzPs2G+/Cjj1X2vdVYV8jYIGrs8R1hHLGeUf9ApeIP6WBOETwSyRj81WKjQQnl8cZ/W5auc8Kh/6e5mWrIbsyzvSwk78weF3EXT9OnmkOLlsjMK4MH7flSnwB0xqjYXrxo3tx2F3oyXZ5THMLAxa9wO8NwJjYss1irO2zqt45jzWsqMWRnImG7qtYqxLksz05QlSqa4R+uYTbvQYb3gRFgHbZbRqKfwIDAQAB";
             return Security.verifyPurchase(base64Key, signedData, signature);
         } catch (IOException e) {
@@ -405,43 +373,55 @@ public class page1 extends AppCompatActivity implements PurchasesUpdatedListener
                             seven_nine = dialogView.findViewById(R.id.seven_nine);
                             four_six = dialogView.findViewById(R.id.four_six);
                            dialogBox_cancel_btn = dialogView.findViewById(R.id.cancel_button_dialogBox);
-                            four_six.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    four_six.setBackgroundColor(Color.parseColor("#2F6666"));
-                                    purchase_btn_press = "level_4_6";
-                                    PRODUCT_ID = "level_4_6";
-                                    purchase();
-                                    alertDialog.dismiss();
-                                }
-                            });
-                            seven_nine.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    purchase_btn_press = "l_7_9";
-                                    PRODUCT_ID = "l_7_9";
-                                    purchase();
-                                    alertDialog.dismiss();
-                                }
-                            });
-                            ten_twelve.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    purchase_btn_press ="l_10_12";
-                                    PRODUCT_ID = "l_10_12";
-                                    purchase();
-                                    alertDialog.dismiss();
-                                }
-                            });
-                            four_twelve.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    purchase_btn_press ="l_4_12";
-                                    PRODUCT_ID = "l_4_12";
-                                    purchase();
-                                    alertDialog.dismiss();
-                                }
-                            });
+                               four_six.setOnClickListener(new View.OnClickListener() {
+                                   @Override
+                                   public void onClick(View v) {
+                                       if(previousScore.getPurchaseValueFromPref() == true){
+                                           Toast.makeText(page1.this, "Already Purchased", Toast.LENGTH_SHORT).show();
+                                       }else{
+                                       four_six.setBackgroundColor(Color.parseColor("#2F6666"));
+                                       purchase_btn_press = "level_4_6";
+                                       PRODUCT_ID = "level_4_6";
+                                       purchase();
+                                       alertDialog.dismiss();
+                                   }}
+                               });
+                                seven_nine.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        if(previousScore.getPurchaseValueFromPref_level_7_9() == true){
+                                            Toast.makeText(page1.this, "Already Purchased", Toast.LENGTH_SHORT).show();
+                                        }else{
+                                        purchase_btn_press = "l_7_9";
+                                        PRODUCT_ID = "l_7_9";
+                                        purchase();
+                                        alertDialog.dismiss();
+                                    }}
+                                });
+                                ten_twelve.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        if(previousScore.getPurchaseValueFromPref_level_10_12() == true){
+                                            Toast.makeText(page1.this, "Already Purchased", Toast.LENGTH_SHORT).show();
+                                        }else {
+                                        purchase_btn_press = "l_10_12";
+                                        PRODUCT_ID = "l_10_12";
+                                        purchase();
+                                        alertDialog.dismiss();
+                                    }}
+                                });
+                                four_twelve.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        if(previousScore.getPurchaseValueFromPref_level_4_12() == true){
+                                            Toast.makeText(page1.this, "Already Purchased", Toast.LENGTH_SHORT).show();
+                                        }else {
+                                        purchase_btn_press = "l_4_12";
+                                        PRODUCT_ID = "l_4_12";
+                                        purchase();
+                                        alertDialog.dismiss();
+                                    }}
+                                });
                             dialogBox_cancel_btn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {

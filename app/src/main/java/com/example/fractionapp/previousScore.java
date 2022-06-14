@@ -40,5 +40,29 @@ public String getScore(){
     public String getLevel(){
         return sharedPreferences.getString("Level","");
     }
+    protected void savePurchaseValueToPref ( Boolean value){
+        sharedPreferences.edit().putBoolean("PURCHASE_Level_4_6", value).commit();
+    }
+        protected Boolean getPurchaseValueFromPref () {
+        return sharedPreferences.getBoolean("PURCHASE_Level_4_6", false);
+    }
+    protected void savePurchaseValueToPref_level_7_9 ( Boolean value){
+        sharedPreferences.edit().putBoolean("PURCHASE_Level_7_9", value).commit();
+    }
+    protected Boolean getPurchaseValueFromPref_level_7_9 () {
+        return sharedPreferences.getBoolean("PURCHASE_Level_7_9", false);
+    }
+    protected void savePurchaseValueToPref_level_10_12 ( Boolean value){
+        sharedPreferences.edit().putBoolean("PURCHASE_Level_10_12", value).commit();
+    }
+    protected Boolean getPurchaseValueFromPref_level_10_12 () {
+        return sharedPreferences.getBoolean("PURCHASE_Level_10_12", false);
+    }
+    protected void savePurchaseValueToPref_level_4_12 ( Boolean value){
+        sharedPreferences.edit().putBoolean("PURCHASE_Level_4_12", value).commit();
+    }
+    protected Boolean getPurchaseValueFromPref_level_4_12 () {
+        return sharedPreferences.getBoolean("PURCHASE_Level_4_12", false);
+    }
 }
 

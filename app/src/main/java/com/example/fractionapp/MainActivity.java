@@ -185,8 +185,7 @@ int currentScore = 0, currentpos, finishTime;
                 textBox2.setClickable(false);
                 textBox3.setClickable(false);
                 textBox4.setClickable(false);
-                final Handler handler = new Handler(Looper.getMainLooper());
-               _text1 = text1.getText().toString().trim() + text2.getText().toString().trim();
+                _text1 = text1.getText().toString().trim() + text2.getText().toString().trim();
                 if(questionAttempted != 1) {
                     attempted_qts.setText(questionAttempted + "/" + "10");
                     questionAttempted++;
@@ -195,13 +194,14 @@ int currentScore = 0, currentpos, finishTime;
                 }
                 if(quizModelarrayList.get(currentpos).getAnswer().trim().equals(_text1)){
                     currentScore++;
+                    setCartoonRightAnimation();
+                    textBox1.setBackground(getDrawable(R.drawable.right_answer_shape));
                     setCartoonImage();
-                        setCartoonRightAnimation();
-                        textBox1.setBackground(getDrawable(R.drawable.right_answer_shape));
                 }else{
-                    setCartoonWrongAnimation();
                     textBox1.setBackground(getDrawable(R.drawable.wrong_answer_shape));
+                    setCartoonWrongAnimation();
                 }
+                final Handler handler = new Handler(Looper.getMainLooper());
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -241,7 +241,6 @@ int currentScore = 0, currentpos, finishTime;
         textBox2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Handler handler = new Handler(Looper.getMainLooper());
                 quit.setClickable(false);
                 textBox1.setClickable(false);
                 textBox2.setClickable(false);
@@ -263,6 +262,7 @@ int currentScore = 0, currentpos, finishTime;
                     setCartoonWrongAnimation();
                     textBox2.setBackground(getDrawable(R.drawable.wrong_answer_shape));
                 }
+                final Handler handler = new Handler(Looper.getMainLooper());
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -302,7 +302,6 @@ int currentScore = 0, currentpos, finishTime;
         textBox3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Handler handler = new Handler(Looper.getMainLooper());
                 quit.setClickable(false);
                 textBox1.setClickable(false);
                 textBox2.setClickable(false);
@@ -317,13 +316,14 @@ int currentScore = 0, currentpos, finishTime;
                 }
                 if(quizModelarrayList.get(currentpos).getAnswer().trim().equals(_text3)){
                     currentScore++;
-                    setCartoonImage();
                     setCartoonRightAnimation();
                     textBox3.setBackground(getDrawable(R.drawable.right_answer_shape));
+                    setCartoonImage();
                 }else{
                     setCartoonWrongAnimation();
                     textBox3.setBackground(getDrawable(R.drawable.wrong_answer_shape));
                 }
+                final Handler handler = new Handler(Looper.getMainLooper());
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -363,7 +363,6 @@ int currentScore = 0, currentpos, finishTime;
         textBox4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Handler handler = new Handler(Looper.getMainLooper());
                 quit.setClickable(false);
                 textBox1.setClickable(false);
                 textBox2.setClickable(false);
@@ -379,13 +378,14 @@ int currentScore = 0, currentpos, finishTime;
                 }
                 if(quizModelarrayList.get(currentpos).getAnswer().trim().equals(_text4)){
                     currentScore++;
-                    setCartoonImage();
                     setCartoonRightAnimation();
                     textBox4.setBackground(getDrawable(R.drawable.right_answer_shape));
+                    setCartoonImage();
                 }else{
                     setCartoonWrongAnimation();
                     textBox4.setBackground(getDrawable(R.drawable.wrong_answer_shape));
                 }
+                final Handler handler = new Handler(Looper.getMainLooper());
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {

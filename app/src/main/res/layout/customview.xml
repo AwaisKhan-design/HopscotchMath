@@ -1,54 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="400dp"
+    android:layout_height="280dp"
+    android:layout_gravity="center"
+    android:background="#75000000"
+    android:id="@+id/dialog_Box">
+
+    <Button
+        android:id="@+id/cancel_button_dialogBox"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="end"
+        android:gravity="center"
+        android:layout_marginEnd="20dp"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/ic_baseline_cancel_presentation_24" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:weightSum="3"
-        android:padding="16dp">
+        android:layout_height="wrap_content"
+        android:background="@drawable/frame4"
+        android:padding="10dp"
+        android:weightSum="4">
+
         <TextView
             android:id="@+id/four_six"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
+            android:layout_width="130dp"
+            android:layout_height="80dp"
             android:layout_gravity="center"
-            android:background="@drawable/square_shape"
-            android:gravity="center_horizontal|center_vertical"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/square_shape_purchase_btn"
             android:fontFamily="@font/morning_rainbow"
+            android:gravity="center_horizontal|center_vertical"
             android:text="Sets 4-6\n$1.99"
-            android:textColor="@color/black"
-            android:textSize="16dp"/>
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+
         <TextView
             android:id="@+id/seven_nine"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-           android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:background="@drawable/square_shape"
+            android:layout_width="130dp"
+            android:layout_height="80dp"
             android:layout_gravity="center"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
             android:layout_weight="1"
-            android:gravity="center_horizontal|center_vertical"
+            android:background="@drawable/square_shape_purchase_btn"
             android:fontFamily="@font/morning_rainbow"
+            android:gravity="center_horizontal|center_vertical"
             android:text="Sets 7-9\n$1.99"
-            android:textColor="@color/black"
-            android:textSize="16dp"/>
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+
         <TextView
             android:id="@+id/ten_twelve"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:background="@drawable/square_shape"
-            android:layout_weight="1"
+            android:layout_width="130dp"
+            android:layout_height="80dp"
             android:layout_gravity="center"
-            android:gravity="center_horizontal|center_vertical"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/square_shape_purchase_btn"
             android:fontFamily="@font/morning_rainbow"
-            android:text="Sets 10-12\n$4.99"
-            android:textColor="@color/black"
-            android:textSize="16dp"/>
+            android:gravity="center_horizontal|center_vertical"
+            android:text="Sets 10-12\n$1.99"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/four_twelve"
+            android:layout_width="130dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/square_shape_purchase_btn"
+            android:fontFamily="@font/morning_rainbow"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="Sets 4-12\n$4.99"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
     </LinearLayout>
-</LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginStart="30dp"
+        android:fontFamily="@font/morning_rainbow"
+        android:gravity="center"
+        android:text="Purchasing Sets"
+        android:textColor="@color/white"
+        android:textSize="20dp" />
+</RelativeLayout>

@@ -1,44 +1,41 @@
 package com.example.fractionapp;
 
-import static com.android.billingclient.api.BillingClient.SkuType.INAPP;
-
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 
-import android.app.Activity;
+import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.billingclient.api.AcknowledgePurchaseParams;
-import com.android.billingclient.api.AcknowledgePurchaseResponseListener;
 import com.android.billingclient.api.BillingClient;
 import com.android.billingclient.api.BillingClientStateListener;
 import com.android.billingclient.api.BillingFlowParams;
 import com.android.billingclient.api.BillingResult;
+import com.android.billingclient.api.ConsumeParams;
+import com.android.billingclient.api.ConsumeResponseListener;
 import com.android.billingclient.api.Purchase;
+import com.android.billingclient.api.PurchasesResponseListener;
 import com.android.billingclient.api.PurchasesUpdatedListener;
 import com.android.billingclient.api.SkuDetails;
 import com.android.billingclient.api.SkuDetailsParams;
 import com.android.billingclient.api.SkuDetailsResponseListener;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class page1 extends AppCompatActivity implements PurchasesUpdatedListener {
+public class page1 extends AppCompatActivity{
     previousScore previousScore;
     Button next_btn, direction_btn, dialogBox_cancel_btn;
     TextView addbtn1, increment_level, decrement_level,number, decrement_btn, second, note1, note2, webLink, four_six, seven_nine, ten_twelve, four_twelve;
@@ -48,273 +45,199 @@ public class page1 extends AppCompatActivity implements PurchasesUpdatedListener
     AlertDialog.Builder builder;
     AlertDialog alertDialog;
     View dialogView;
-    private BillingClient billingClient;
     int set_Limit = 3;
-    public static String PRODUCT_ID= "";
     String purchase_btn_press = "";
+    BillingClient billingClient;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page1);
         try {
             previousScore = new previousScore(getApplicationContext());
-            builder = new AlertDialog.Builder(page1.this);
+            builder = new AlertDialog.Builder(this);
+            dialogView = new View(page1.this);
             findViews();
             if (previousScore.getScore().equals("")) {
                 note2.setText("High Score 0/10 (");
             } else {
                 note2.setText("High Score " + previousScore.getScore() + "/" + "10" + " (");
             }
-            _number = Integer.parseInt(number.getText().toString());
-            level = note1.getText().toString();
-            actionListners();
-            billingClient = BillingClient.newBuilder(this)
-                    .enablePendingPurchases().setListener(this).build();
-            billingClient.startConnection(new BillingClientStateListener() {
-                @Override
-                public void onBillingSetupFinished(BillingResult billingResult) {
-                    if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-                        Purchase.PurchasesResult queryPurchase = billingClient.queryPurchases(INAPP);
-                        List<Purchase> queryPurchases = queryPurchase.getPurchasesList();
-                        if (queryPurchases != null && queryPurchases.size() > 0) {
-                            handlePurchases(queryPurchases);
-                        }
-                        //if purchase list is empty that means item is not purchased
-                        //Or purchase is refunded or canceled
-                        else {
-                            if(purchase_btn_press.equals("level_4_6")){
-                                previousScore.savePurchaseValueToPref(false);
-                            }else if(purchase_btn_press.equals("l_7_9")){
-                                previousScore.savePurchaseValueToPref_level_7_9(false);
-                            }else if(purchase_btn_press.equals("l_10_12")){
-                                previousScore.savePurchaseValueToPref_level_10_12(false);
-                            }else if(purchase_btn_press.equals("l_4_12")){
-                                previousScore.savePurchaseValueToPref_level_4_12(false);
-                            }
-                        }
-                    }
-                }
-
-                @Override
-                public void onBillingServiceDisconnected() {
-                }
-            });
-            //item Purchased OR Item Not Purchased
-            if (previousScore.getPurchaseValueFromPref() == true) {
+            if(previousScore.getPurchaseValueFromPref() == true){
                 set_Limit = 6;
-            }
-            else {}
+            }else{}
             if(previousScore.getPurchaseValueFromPref_level_7_9() == true){
                 set_Limit = 9;
-            }
-            else {}
+            }else{}
             if(previousScore.getPurchaseValueFromPref_level_10_12() == true){
                 set_Limit = 12;
-            }
-            else {}
+            }else{}
             if(previousScore.getPurchaseValueFromPref_level_4_12() == true){
                 set_Limit = 12;
-            }
-            else {}
-        } catch (Exception e) {
-            Toast.makeText(this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }else{}
+            _number = Integer.parseInt(number.getText().toString());
+            level = note1.getText().toString();
+            dialogView = LayoutInflater.from(page1.this).inflate(R.layout.customview, viewGroup, false);
+            four_twelve = dialogView.findViewById(R.id.four_twelve);
+            ten_twelve = dialogView.findViewById(R.id.ten_twelve);
+            seven_nine = dialogView.findViewById(R.id.seven_nine);
+            four_six = dialogView.findViewById(R.id.four_six);
+            dialogBox_cancel_btn = dialogView.findViewById(R.id.cancel_button_dialogBox);
+            actionListners();
+            //Initialize a BillingClient with PurchasesUpdatedListener onCreate method
+            billingClient = BillingClient.newBuilder(getApplicationContext())
+                    .setListener(new PurchasesUpdatedListener() {
+                        @Override
+                        public void onPurchasesUpdated(@NonNull BillingResult billingResult, @Nullable List<Purchase> list) {
+                            if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && list != null) {
+                                for (Purchase purchase : list) {
+                                    verifyPayment(purchase);
+                                }
+                            }
+
+                        }
+                    })
+                    .enablePendingPurchases()
+                    .build();
+            // call connectGooglePlayBilling()
+            connectGooglePlayBilling();
+        }catch (Exception e){
+            Toast.makeText(this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
-    //initiate purchase on button click
-    public void purchase () {
-        //check if service is already connected
-        if (billingClient.isReady()) {
-            initiatePurchase();
-        }
-        //else reconnect service
-        else {
-            billingClient = BillingClient.newBuilder(this).enablePendingPurchases().setListener(this).build();
-            billingClient.startConnection(new BillingClientStateListener() {
-                @Override
-                public void onBillingSetupFinished(BillingResult billingResult) {
-                    if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-                        initiatePurchase();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Error " + billingResult.getDebugMessage(), Toast.LENGTH_SHORT).show();
-                    }
+    void connectGooglePlayBilling() {
+
+        billingClient.startConnection(new BillingClientStateListener() {
+
+            @Override
+            public void onBillingServiceDisconnected() {
+                connectGooglePlayBilling();
+            }
+
+            @Override
+            public void onBillingSetupFinished(@NonNull BillingResult billingResult) {
+                if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
+                    Log.d("TAG", "Connected " + 0);
+                    getProducts();
                 }
 
-                @Override
-                public void onBillingServiceDisconnected() {
-                }
-            });
-        }
+            }
+        });
     }
-    private void initiatePurchase () {
+    void getProducts() {
         List<String> skuList = new ArrayList<>();
-        skuList.add(PRODUCT_ID);
+        //replace these with your product IDs from google play console
+        skuList.add("level_4_6");
+        skuList.add("l_7_9");
+        skuList.add("l_10_12");
+        skuList.add("l_4_12");
         SkuDetailsParams.Builder params = SkuDetailsParams.newBuilder();
-        params.setSkusList(skuList).setType(INAPP);
+       params.setSkusList(skuList).setType(BillingClient.SkuType.INAPP);
         billingClient.querySkuDetailsAsync(params.build(),
                 new SkuDetailsResponseListener() {
+                    @SuppressLint("SetTextI18n")
                     @Override
                     public void onSkuDetailsResponse(BillingResult billingResult,
                                                      List<SkuDetails> skuDetailsList) {
-                        if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-                            if (skuDetailsList != null && skuDetailsList.size() > 0) {
-                                BillingFlowParams flowParams = BillingFlowParams.newBuilder()
-                                        .setSkuDetails(skuDetailsList.get(0))
-                                        .build();
-                                billingClient.launchBillingFlow(page1.this, flowParams);
-                            } else {
-                                //try to add item/product id "purchase" inside managed product in google play console
-                                Toast.makeText(getApplicationContext(), "Purchase Item not Found", Toast.LENGTH_SHORT).show();
+                        // Process the result.
+                        if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && skuDetailsList != null) {
+                            for (SkuDetails skuDetails : skuDetailsList) {
+                                if (skuDetails.getSku().equals("level_4_6")) {
+                                        four_six.setOnClickListener(view -> {
+                                            launchPurchaseFlow(skuDetails);
+                                            purchase_btn_press = "level_4_6";
+                                            alertDialog.dismiss();
+                                        });
+                                } else if (skuDetails.getSku().equals("l_7_9")) {
+                                    seven_nine.setOnClickListener(view -> {
+                                            launchPurchaseFlow(skuDetails);
+                                            purchase_btn_press = "l_7_9";
+                                            alertDialog.dismiss();
+                                    });
+                                } else if (skuDetails.getSku().equals("l_10_12")) {
+                                    ten_twelve.setOnClickListener(view -> {
+                                            launchPurchaseFlow(skuDetails);
+                                            purchase_btn_press = "l_10_12";
+                                            alertDialog.dismiss();
+                                    });
+                                } else if (skuDetails.getSku().equals("l_4_12")) {
+                                    four_twelve.setOnClickListener(view -> {
+                                            launchPurchaseFlow(skuDetails);
+                                            purchase_btn_press = "l_4_12";
+                                            alertDialog.dismiss();
+                                    });
+                                }else{}
                             }
-                        } else {
-                            Toast.makeText(getApplicationContext(),
-                                    " Error " + billingResult.getDebugMessage(), Toast.LENGTH_SHORT).show();
                         }
+
                     }
                 });
     }
+    void launchPurchaseFlow(SkuDetails skuDetails) {
 
-    @Override
-    public void onPurchasesUpdated (BillingResult
-                                            billingResult, @Nullable List < Purchase > purchases){
-        //if item newly purchased
-        if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && purchases != null) {
-            handlePurchases(purchases);
-        }
-        //if item already purchased then check and reflect changes
-        else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED) {
-            Purchase.PurchasesResult queryAlreadyPurchasesResult = billingClient.queryPurchases(INAPP);
-            List<Purchase> alreadyPurchases = queryAlreadyPurchasesResult.getPurchasesList();
-            if (alreadyPurchases != null) {
-                handlePurchases(alreadyPurchases);
-            }
-        }
-        //if purchase cancelled
-        else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.USER_CANCELED) {
-            Toast.makeText(getApplicationContext(), "Purchase Cancelled", Toast.LENGTH_SHORT).show();
-        }
-        // Handle any other error msgs
-        else {
-            Toast.makeText(getApplicationContext(), "Error " + billingResult.getDebugMessage(), Toast.LENGTH_SHORT).show();
-        }
-    }
-    void handlePurchases (List < Purchase > purchases) {
-        for (Purchase purchase : purchases) {
-            //if item is purchased
-            if (PRODUCT_ID.equals(purchase.getSku()) && purchase.getPurchaseState() == Purchase.PurchaseState.PURCHASED) {
-                if (!verifyValidSignature(purchase.getOriginalJson(), purchase.getSignature())) {
-                    // Invalid purchase
-                    // show error to user
-                    Toast.makeText(getApplicationContext(), "Error : Invalid Purchase", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                // else purchase is valid
-                //if item is purchased and not acknowledged
-                if (!purchase.isAcknowledged()) {
-                    AcknowledgePurchaseParams acknowledgePurchaseParams =
-                            AcknowledgePurchaseParams.newBuilder()
-                                    .setPurchaseToken(purchase.getPurchaseToken())
-                                    .build();
-                    billingClient.acknowledgePurchase(acknowledgePurchaseParams, ackPurchase);
-                }
-                //else item is purchased and also acknowledged
-                else {
-                    // Grant entitlement to the user on item purchase
-                    // restart activity
-                    if (!previousScore.getPurchaseValueFromPref()) {
-                        if(purchase_btn_press.equals("level_4_6")){
-                            previousScore.savePurchaseValueToPref(true);
-                            Intent intent = new Intent(page1.this,page1.class);
-                            startActivity(intent);
-                            finish();
-                        }else{}
-                    }else{}
-                    if (!previousScore.getPurchaseValueFromPref_level_7_9()){
-                        if(purchase_btn_press.equals("l_7_9")){
-                            previousScore.savePurchaseValueToPref_level_7_9(true);
-                            Intent intent = new Intent(page1.this,page1.class);
-                            startActivity(intent);
-                            finish();
-                        }else{}
-                    }else{}
-                    if (!previousScore.getPurchaseValueFromPref_level_10_12()){
-                        if(purchase_btn_press.equals("l_10_12")){
-                            previousScore.savePurchaseValueToPref_level_10_12(true);
-                            Intent intent = new Intent(page1.this,page1.class);
-                            startActivity(intent);
-                            finish();
-                        }else{}
-                    }else{}
-                    if (!previousScore.getPurchaseValueFromPref_level_4_12()){
-                        if(purchase_btn_press.equals("l_4_12")){
-                            previousScore.savePurchaseValueToPref_level_4_12(true);
-                            Intent intent = new Intent(page1.this,page1.class);
-                            startActivity(intent);
-                            finish();
-                        }else{}
-                    }else{}
-                }
-            }
-            //if purchase is pending
-            else if (PRODUCT_ID.equals(purchase.getSku()) && purchase.getPurchaseState() == Purchase.PurchaseState.PENDING) {
-                Toast.makeText(getApplicationContext(),
-                        "Purchase is Pending. Please complete Transaction", Toast.LENGTH_SHORT).show();
-            }
-            //if purchase is unknown
-            else if (PRODUCT_ID.equals(purchase.getSku()) && purchase.getPurchaseState() == Purchase.PurchaseState.UNSPECIFIED_STATE) {
-                if(purchase_btn_press.equals("level_4_6")){
-                    previousScore.savePurchaseValueToPref(false);
-                }else if(purchase_btn_press.equals("l_7_9")){
-                    previousScore.savePurchaseValueToPref_level_7_9(false);
-                }else if(purchase_btn_press.equals("l_10_12")){
-                    previousScore.savePurchaseValueToPref_level_10_12(false);
-                }else if(purchase_btn_press.equals("l_4_12")){
-                    previousScore.savePurchaseValueToPref_level_4_12(false);
-                }
-                Toast.makeText(this, "Purchase Status : Not Purchased", Toast.LENGTH_SHORT).show();
-                Toast.makeText(getApplicationContext(), "Purchase Status Unknown", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-    AcknowledgePurchaseResponseListener ackPurchase = new AcknowledgePurchaseResponseListener() {
-        @Override
-        public void onAcknowledgePurchaseResponse(BillingResult billingResult) {
-            if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-                //if purchase is acknowledged
-                // Grant entitlement to the user. and restart activity
-                if(purchase_btn_press.equals("level_4_6")){
-                    previousScore.savePurchaseValueToPref(true);
-                }else if(purchase_btn_press.equals("l_7_9")){
-                    previousScore.savePurchaseValueToPref_level_7_9(true);
-                }else if(purchase_btn_press.equals("l_10_12")){
-                    previousScore.savePurchaseValueToPref_level_10_12(true);
-                }else if(purchase_btn_press.equals("l_4_12")){
-                    previousScore.savePurchaseValueToPref_level_4_12(true);
-                }
-                Toast.makeText(getApplicationContext(), "Item Purchased", Toast.LENGTH_SHORT).show();
-                page1.this.recreate();
-            }
-        }
-    };
+        BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
+                .setSkuDetails(skuDetails)
+                .build();
 
-    /**
-     * Verifies that the purchase was signed correctly for this developer's public key.
-     * <p>Note: It's strongly recommended to perform such check on your backend since hackers can
-     * replace this method with "constant true" if they decompile/rebuild your app.
-     * </p>
-     */
-    private boolean verifyValidSignature (String signedData, String signature){
+        billingClient.launchBillingFlow(page1.this, billingFlowParams);
+    }
+    void verifyPayment(Purchase purchase) {
+        ConsumeParams consumeParams = ConsumeParams.newBuilder()
+                .setPurchaseToken(purchase.getPurchaseToken())
+                .build();
+
+        ConsumeResponseListener listener = new ConsumeResponseListener() {
+            @Override
+            public void onConsumeResponse(@NonNull BillingResult billingResult, @NonNull String s) {
+                if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
+
+                    if (purchase.getSkus().get(0).equals("level_4_6")) {
+                        previousScore.savePurchaseValueToPref(true);
+                        Intent intent = new Intent(page1.this,page1.class);
+                        startActivity(intent);
+                        finish();
+                    } else if (purchase.getSkus().get(0).equals("l_7_9")) {
+                        previousScore.savePurchaseValueToPref_level_7_9(true);
+                        Intent intent = new Intent(page1.this,page1.class);
+                        startActivity(intent);
+                        finish();
+                    } else if (purchase.getSkus().get(0).equals("l_10_12")) {
+                        previousScore.savePurchaseValueToPref_level_10_12(true);
+                        Intent intent = new Intent(page1.this,page1.class);
+                        startActivity(intent);
+                        finish();
+                    }else if (purchase.getSkus().get(0).equals("l_4_12")) {
+                        previousScore.savePurchaseValueToPref_level_4_12(true);
+                        Intent intent = new Intent(page1.this,page1.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                }
+
+            }
+        };
+        billingClient.consumeAsync(consumeParams, listener);
+    }
+
+    protected void onResume() {
         try {
-            String base64Key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAg0voCSR1bIFirULG+MBeGE2rq2wlWgIHOkTria2m+NUR2ru22hg+Qcf28cObh8c166/meT2FdH4bC8jB47uo/bGBH2WcgfI1nj3uemfONx22NpjpQ/mbvuVOzPs2G+/Cjj1X2vdVYV8jYIGrs8R1hHLGeUf9ApeIP6WBOETwSyRj81WKjQQnl8cZ/W5auc8Kh/6e5mWrIbsyzvSwk78weF3EXT9OnmkOLlsjMK4MH7flSnwB0xqjYXrxo3tx2F3oyXZ5THMLAxa9wO8NwJjYss1irO2zqt45jzWsqMWRnImG7qtYqxLksz05QlSqa4R+uYTbvQYb3gRFgHbZbRqKfwIDAQAB";
-            return Security.verifyPurchase(base64Key, signedData, signature);
-        } catch (IOException e) {
-            return false;
-        }
-    }
-    @Override
-    protected void onDestroy () {
-        super.onDestroy();
-        if (billingClient != null) {
-            billingClient.endConnection();
+            super.onResume();
+            billingClient.queryPurchasesAsync(
+                    BillingClient.SkuType.INAPP,
+                    new PurchasesResponseListener() {
+                        @Override
+                        public void onQueryPurchasesResponse(@NonNull BillingResult billingResult, @NonNull List<Purchase> list) {
+                            if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
+                                for (Purchase purchase : list) {
+                                    if (purchase.getPurchaseState() == Purchase.PurchaseState.PURCHASED && !purchase.isAcknowledged()) {
+                                        verifyPayment(purchase);
+                                    }
+                                }
+                            }
+                        }
+                    }
+            );
+        }catch (Exception e){
+            Toast.makeText(this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
     private void findViews() {
@@ -332,11 +255,19 @@ public class page1 extends AppCompatActivity implements PurchasesUpdatedListener
         viewGroup = findViewById(android.R.id.content);
     }
     private void actionListners() {
+        builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                ((ViewGroup)dialogView.getParent()).removeView(dialogView);
+            }
+        });
         webLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                webLink.setTextColor(Color.GREEN);
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.MonumentalMath.com"));
                 startActivity(browserIntent);
+                webLink.setTextColor(Color.parseColor("#006AFF"));
             }
         });
         next_btn.setOnClickListener(new View.OnClickListener() {
@@ -357,6 +288,12 @@ public class page1 extends AppCompatActivity implements PurchasesUpdatedListener
                 finish();
             }
         });
+        dialogBox_cancel_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
         addbtn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -367,67 +304,6 @@ public class page1 extends AppCompatActivity implements PurchasesUpdatedListener
                         decrement_btn.setVisibility(View.VISIBLE);
                         if(_number == set_Limit) {
                             addbtn1.setVisibility(View.INVISIBLE);
-                            dialogView = LayoutInflater.from(v.getContext()).inflate(R.layout.customview, viewGroup, false);
-                            four_twelve = dialogView.findViewById(R.id.four_twelve);
-                            ten_twelve = dialogView.findViewById(R.id.ten_twelve);
-                            seven_nine = dialogView.findViewById(R.id.seven_nine);
-                            four_six = dialogView.findViewById(R.id.four_six);
-                           dialogBox_cancel_btn = dialogView.findViewById(R.id.cancel_button_dialogBox);
-                               four_six.setOnClickListener(new View.OnClickListener() {
-                                   @Override
-                                   public void onClick(View v) {
-                                       if(previousScore.getPurchaseValueFromPref() == true){
-                                           Toast.makeText(page1.this, "Already Purchased", Toast.LENGTH_SHORT).show();
-                                       }else{
-                                       four_six.setBackgroundColor(Color.parseColor("#2F6666"));
-                                       purchase_btn_press = "level_4_6";
-                                       PRODUCT_ID = "level_4_6";
-                                       purchase();
-                                       alertDialog.dismiss();
-                                   }}
-                               });
-                                seven_nine.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        if(previousScore.getPurchaseValueFromPref_level_7_9() == true){
-                                            Toast.makeText(page1.this, "Already Purchased", Toast.LENGTH_SHORT).show();
-                                        }else{
-                                        purchase_btn_press = "l_7_9";
-                                        PRODUCT_ID = "l_7_9";
-                                        purchase();
-                                        alertDialog.dismiss();
-                                    }}
-                                });
-                                ten_twelve.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        if(previousScore.getPurchaseValueFromPref_level_10_12() == true){
-                                            Toast.makeText(page1.this, "Already Purchased", Toast.LENGTH_SHORT).show();
-                                        }else {
-                                        purchase_btn_press = "l_10_12";
-                                        PRODUCT_ID = "l_10_12";
-                                        purchase();
-                                        alertDialog.dismiss();
-                                    }}
-                                });
-                                four_twelve.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        if(previousScore.getPurchaseValueFromPref_level_4_12() == true){
-                                            Toast.makeText(page1.this, "Already Purchased", Toast.LENGTH_SHORT).show();
-                                        }else {
-                                        purchase_btn_press = "l_4_12";
-                                        PRODUCT_ID = "l_4_12";
-                                        purchase();
-                                        alertDialog.dismiss();
-                                    }}
-                                });
-                            dialogBox_cancel_btn.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                    alertDialog.cancel();
-                            }
-        });
                             builder.setView(dialogView);
                             alertDialog = builder.create();
                             alertDialog.show();
@@ -436,7 +312,7 @@ public class page1 extends AppCompatActivity implements PurchasesUpdatedListener
                             }
                         }
                         else if(_number == 12){
-                            alertDialog.cancel();
+                            alertDialog.dismiss();
                         }
                     }
                 }catch (Exception e){
@@ -517,6 +393,7 @@ public class page1 extends AppCompatActivity implements PurchasesUpdatedListener
                     Toast.makeText(page1.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
+
         });
     }
 }
